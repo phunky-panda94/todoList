@@ -28,6 +28,8 @@ nav {
     text-decoration: none;
     padding-left: 10px;
     padding-right: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .nav-right {
@@ -38,6 +40,14 @@ nav {
     border-radius: 50%;
     height: 50px;
     width: 50px;
+}
+
+.selected, .nav-btn:hover {
+    background-color: #ffffff;
+    border-radius: 1em;
+    color: #2c2c2c;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
 /* carousel */
@@ -52,6 +62,7 @@ nav {
 
 .arrow:hover {
     color: #ACACA7;
+    cursor: pointer;
 }
 
 #carousel {
@@ -74,6 +85,7 @@ nav {
 
 .circle:hover {
     background-color: #ACACA7;
+    cursor: pointer;
 }
 
 #quote-box {
@@ -84,10 +96,34 @@ nav {
     font-style: italic;
     height: 80px;
     width: 60vw;
-    /* margin-top: 25px;
-    margin-bottom: 5px; */
     margin-left: 10px;
     margin-right: 10px;
+}
+
+.add-btn {
+    border: 1px solid #ACACA7;
+    background-color: transparent;
+    border-radius: 50%;
+    height: 50px;
+    margin-right: 7%;
+    width: 50px;
+}
+
+.add-btn::before, .add-btn::after {
+    content: '';
+    background-color: #ACACA7;
+    height: 30px;
+    width: 3px;
+    position: absolute;
+}
+
+.add-btn::after {
+    transform: rotate(90deg);
+}
+
+.add-btn:hover {
+    background-color: #E5E8E1;
+    cursor: pointer;
 }
 
 /* flexbox */
