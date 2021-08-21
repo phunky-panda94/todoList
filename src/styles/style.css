@@ -15,6 +15,64 @@ html {
     border: 1px solid black;
 }
 
+
+/* flexbox */
+.flex {
+    display: flex;
+}
+
+.flex-jc-c {
+    justify-content: center;
+}
+
+.flex-jc-fe {
+    justify-content: flex-end;
+}
+
+.flex-ai-c {
+    align-items: center;
+}
+
+.flex-jc-sb {
+    justify-content: space-around;
+}
+
+.flex-col {
+    flex-direction: column;
+}
+
+.flex-row {
+    flex-direction: row;
+}
+
+.flex-wrap {
+    flex-wrap: wrap;
+}
+
+/* hamburger menu */
+
+#hamburger-menu {
+    height: 30px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#hamburger-menu:hover {
+    cursor: pointer;
+}
+
+#hamburger-menu > span {
+    display: block;
+    width: 33px;
+    height: 4px;
+    background-color: #ffffff;
+    border-radius: 3px;
+}
+
+#hamburger-menu:hover > span {
+    background-color: #ACACA7;
+}
+
 /* nav bar */
 
 nav {
@@ -44,10 +102,10 @@ nav {
 
 .selected, .nav-btn:hover {
     background-color: #ffffff;
-    border-radius: 1em;
+    border-radius: 10px;
     color: #2c2c2c;
-    padding-top: 5px;
-    padding-bottom: 5px;
+    padding-top: 6px;
+    padding-bottom: 6px;
 }
 
 /* carousel */
@@ -79,8 +137,8 @@ nav {
     color: #E5E8E1;
     height: 15px;
     width: 15px;
-    margin-left: 2.5px;
-    margin-right: 2.5px;
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
 .circle:hover {
@@ -126,23 +184,44 @@ nav {
     cursor: pointer;
 }
 
-/* flexbox */
-.flex {
-    display: flex;
+/* tasks */
+
+#tasks {
+    padding: 50px;
 }
 
-.flex-jc-c {
-    justify-content: center;
+.card {
+    border: 2px solid #E5E8E1;
+    border-radius: 1em;
+    background-color: #A4D454;
+    color: #ffffff;
+    min-height: 200px;
+    min-width: 300px;
+    padding: 10px;
+    margin-left: 20px;
+    margin-top: 20px;
 }
 
-.flex-jc-fe {
-    justify-content: flex-end;
+.checkbox > input {
+    appearance: none; /* gets rid of default styling */
+    border: 2px solid #ACACA7;
+    border-radius: 50%;
+    background-color: #ffffff;
+    height: 30px;
+    width: 30px;
+    margin-right: 10px;
 }
 
-.flex-ai-c {
-    align-items: center;
+.checkbox > input:checked {
+    border: 2px solid #3c3c3c;
 }
 
-.flex-col {
-    flex-direction: column;
+input:checked::before {
+    content: '\2713';
+    color: #3c3c3c;
+    font-size: 25px;
+    font-weight: 700;
+    position: relative;
+    bottom: 3px;
+    left: 3px;
 }
