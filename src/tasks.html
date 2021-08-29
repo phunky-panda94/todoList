@@ -28,7 +28,30 @@
         </div>
     </nav>
     <main class="flex flex-jc-c flex-col">
-                <div class="flex flex-jc-fe flex-ai-c">
+        <div class="modal flex flex-jc-c flex-ai-c">
+            <div class="modal-content">
+                <form action="" class="flex flex-col flex-jc-sb">
+                    <span class="close flex flex-jc-fe flex-ai-fe">&times;</span>
+                    <label for="task" class="flex flex-ai-c flex-jc-sb">
+                        <span>Task</span>
+                        <input type="text">
+                    </label>
+                    <label for="date" class="flex flex-ai-c flex-jc-sb">
+                        <span>Due Date</span>
+                        <input type="text">
+                    </label>
+                    <label id="notes" for="notes" class="flex flex-jc-sb">
+                        <span>Notes</span>
+                        <textarea name="notes" id="" cols="30" rows="10"></textarea>
+                    </label>
+                    <div id="form-btns" class="flex flex-jc-fe">   
+                        <button class="form-btn">Add</button>
+                        <button class="form-btn">Discard</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="flex flex-jc-fe flex-ai-c">
             <a href="#" class="add-btn flex flex-ai-c flex-jc-c"></a>
         </div>
         <div id="tasks" class="flex flex-row flex-jc-s flex-wrap">

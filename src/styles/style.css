@@ -37,6 +37,10 @@ html {
     align-items: center;
 }
 
+.flex-ai-fe {
+    align-items: flex-end;
+}
+
 .flex-jc-sa {
     justify-content: space-around;
 }
@@ -244,6 +248,87 @@ nav {
     position: relative;
     bottom: 3px;
     left: 3px;
+}
+
+/* Modal */
+
+.modal {
+    display: flex;
+    position: fixed;
+    top: 0px;
+    bottom: 0px;
+    z-index: 1;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgb(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: white;
+    border: 1px solid #ACACA7;
+    border-radius: 1em;
+    height: 60vh;
+    width: 60vw;
+    padding: 40px;
+}
+
+.modal-content > form {
+    height: 100%;
+    width: 100%;
+}
+
+.modal-content > form > label {
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.modal-content > form > label > input {
+    font-size: 18px;
+    height: 40px;
+}
+
+.modal-content > form > label > textarea {
+    font-size: 18px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    resize: none;
+}
+
+.modal-content > form > label > span {
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.modal-content > form > label > input, textarea {
+    width: 85%;
+}
+
+#notes {
+    height: 600px;
+}
+
+#form-btns {
+    width: 100%;
+}
+
+.form-btn {
+    margin-left: 10px;
+    padding: 5px;
+    width: 75px;
+}
+
+.close {
+    color: #aaa;
+    font-size: 36px;
+    font-weight: bold;
+    height: 36px;
+    margin-top: -20px;
+    margin-bottom: 10px;
+}
+  
+.close:hover, .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
 }
 
 .star {
