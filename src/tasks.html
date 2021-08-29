@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/style.css">
+	<script src="main.js"></script>
+    <title>Todo List</title>
+</head>
+<body>
+    <nav class="flex flex-ai-c">
+        <div class="flex flex-ai-c">
+            <div id="hamburger-menu" class="flex flex-col flex-jc-sa">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <a class="nav-btn" href="#">Today</a>
+            <a class="nav-btn selected" href="#">Tasks</a>
+            <a class="nav-btn" href="#">Projects</a>
+        </div>
+        <div class="nav-right flex flex-jc-fe">
+            <div class="flex flex-ai-c ">
+                <img id="profile" src="images/phunky_panda.png" alt="profile">
+                <a class="nav-btn" href="#">Logout</a>
+            </div>
+        </div>
+    </nav>
+    <main class="flex flex-jc-c flex-col">
+                <div class="flex flex-jc-fe flex-ai-c">
+            <a href="#" class="add-btn flex flex-ai-c flex-jc-c"></a>
+        </div>
+        <div id="tasks" class="flex flex-row flex-jc-s flex-wrap">
+            <div class="card">
+                <label class="star flex flex-ai-c flex-jc-sb">
+                    <span>Todo List</span>
+                    <input class="flex flex-ai-c flex-jc-c" type="checkbox" checked>
+                </label>
+                <label class="checkbox flex flex-ai-c">
+                    <input type="checkbox">
+                    <span>Create a landing page</span>
+                </label>
+            </div>
+            <div class="card">
+                <label class="star flex flex-ai-c flex-jc-sb">
+                    <span>Todo List</span>
+                    <input class="flex flex-ai-c flex-jc-c" type="checkbox" checked>
+                </label>
+                <label class="checkbox flex flex-ai-c">
+                    <input type="checkbox">
+                    <span>Create a tasks page</span>
+                </label>
+            </div>
+            <div class="card">
+                <label class="star flex flex-ai-c flex-jc-sb">
+                    <span>Todo List</span>
+                    <input class="flex flex-ai-c flex-jc-c" type="checkbox" checked>
+                </label>
+                <label class="checkbox flex flex-ai-c">
+                    <input type="checkbox">
+                    <span>Create projects page</span>
+                </label>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
