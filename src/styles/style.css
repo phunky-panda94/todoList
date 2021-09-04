@@ -349,16 +349,16 @@ nav {
     cursor: pointer;
 }
 
-.star {
+.heading {
     margin-left: 5px;
     margin-right: 5px;
 }
 
-.star > input {
+.heading > input {
     visibility: hidden;
 }
 
-.star > input::before {
+.heading > input::before {
     content: '\2606';
     color: #E5E8E1;
     font-size: 30px;
@@ -366,7 +366,7 @@ nav {
     visibility: visible;
 }
 
-.star > input:checked::before {
+.heading > input:checked::before {
     content: '\2605';
     color: #3c3c3c;
     font-size: 40px;
@@ -374,11 +374,15 @@ nav {
     visibility: visible;
 }
 
-.star > input:checked::after {
+.heading > input:checked::after {
     content: '\2605';
     color: #ffffff;
     font-size: 20px;
     position: relative;
     top: 2px;
     visibility: visible;
+}
+
+.heading > span {
+    font-weight: 600;
 }
