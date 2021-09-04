@@ -311,9 +311,27 @@ nav {
 }
 
 .form-btn {
+    color: #ffffff;
     margin-left: 10px;
-    padding: 5px;
+    padding: 8px;
     width: 75px;
+}
+
+.action {
+    border: 1px solid #E5E8E1;
+    border-radius: 0.5em;
+    background-color: #A4D454;
+}
+
+.cancel {
+    border: 1px solid #E5E8E1;
+    border-radius: 0.5em;
+    background-color: #848484;
+}
+
+.action:hover, .cancel:hover {
+    padding: 6px;
+    border: 2px solid #3c3c3c;
 }
 
 .close {
