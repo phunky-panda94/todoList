@@ -17,8 +17,8 @@
                 <span></span>
             </div>
             <a class="nav-btn" href="#">Today</a>
-            <a class="nav-btn selected" href="#">Tasks</a>
-            <a class="nav-btn" href="#">Projects</a>
+            <a class="nav-btn" href="#">Tasks</a>
+            <a class="nav-btn selected" href="#">Projects</a>
         </div>
         <div class="nav-right flex flex-jc-fe">
             <div class="flex flex-ai-c ">
@@ -27,39 +27,50 @@
             </div>
         </div>
     </nav>
-    <main class="flex flex-jc-c flex-col">
-        <div class="flex flex-jc-fe flex-ai-c">
-            <button href="#" class="add-btn flex flex-ai-c flex-jc-c"></button>
+    <main class="flex flex-jc-c">
+        <div class="sidebar flex flex-col flex-ai-c">
+            <button class="card flex flex-ai-c">
+                <span>Todo List</span>
+            </button>
+            <button class="card flex flex-ai-c">
+                <span>Thoughts</span>
+            </button>
         </div>
-        <div id="tasks" class="flex flex-row flex-jc-s flex-wrap">
-            <div class="card">
-                <div class="heading flex flex-ai-c flex-jc-sb">
-                    <span>Todo List</span>
-                    <input class="flex flex-ai-c flex-jc-c" type="checkbox">
-                </div>
-                <div class="checkbox flex flex-ai-c">
-                    <input type="checkbox">
-                    <span>Create a landing page</span>
-                </div>
+        <div class="container flex flex-col">
+            <div class="container flex flex-row flex-ai-c flex-jc-sb">
+                <h1>Todo List</h1>
+                <button href="#" class="add-btn flex flex-ai-c flex-jc-c"></button>
             </div>
-            <div class="card">
-                <div class="heading flex flex-ai-c flex-jc-sb">
-                    <span>Todo List</span>
-                    <input class="flex flex-ai-c flex-jc-c" type="checkbox">
+            <div class="container flex flex-row flex-jc-s flex-wrap">
+                <div class="card">
+                    <div class="card-heading flex flex-ai-c flex-jc-sb">
+                        <span>Todo List</span>
+                        <input class="flex flex-ai-c flex-jc-c" type="checkbox">
+                    </div>
+                    <div class="checkbox flex flex-ai-c">
+                        <input type="checkbox">
+                        <span>Create a landing page</span>
+                    </div>
                 </div>
-                <div class="checkbox flex flex-ai-c">
-                    <input type="checkbox">
-                    <span>Create a tasks page</span>
+                <div class="card">
+                    <div class="card-heading flex flex-ai-c flex-jc-sb">
+                        <span>Todo List</span>
+                        <input class="flex flex-ai-c flex-jc-c" type="checkbox">
+                    </div>
+                    <div class="checkbox flex flex-ai-c">
+                        <input type="checkbox">
+                        <span>Create a tasks page</span>
+                    </div>
                 </div>
-            </div>
-            <div class="card">
-                <div class="heading flex flex-ai-c flex-jc-sb">
-                    <span>Todo List</span>
-                    <input class="flex flex-ai-c flex-jc-c" type="checkbox">
-                </div>
-                <div class="checkbox flex flex-ai-c">
-                    <input type="checkbox">
-                    <span>Create projects page</span>
+                <div class="card">
+                    <div class="card-heading flex flex-ai-c flex-jc-sb">
+                        <span>Todo List</span>
+                        <input class="flex flex-ai-c flex-jc-c" type="checkbox">
+                    </div>
+                    <div class="checkbox flex flex-ai-c">
+                        <input type="checkbox">
+                        <span>Create card-headings page</span>
+                    </div>
                 </div>
             </div>
         </div>
