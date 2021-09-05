@@ -144,14 +144,6 @@ nav {
     cursor: pointer;
 }
 
-#carousel {
-    margin-top: 25px;
-}
-
-#carousel-circles {
-    margin: 10px;
-}
-
 .circle {
     border: transparent;
     border-radius: 50%;
@@ -173,10 +165,10 @@ nav {
     border-radius: 1em;
     color: #ffffff;
     font-style: italic;
-    height: 80px;
-    width: 60vw;
-    margin-left: 10px;
-    margin-right: 10px;
+    min-height: 80px;
+    min-width: 60vw;
+    margin: 10px;
+    padding: 15px;
 }
 
 .add-btn {
