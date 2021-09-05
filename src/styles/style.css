@@ -394,7 +394,7 @@ nav {
 /* sidebar */
 
 .sidebar {
-    visibility: visible;
+    visibility: hidden;
     height: 100vh;
     width: 350px;
     position: fixed;
@@ -405,7 +405,7 @@ nav {
 
 .sidebar > .card {
     background-color: #80B24B;
-    border: none;
+    border: 2px solid #ACACA7;
     font-size: 18px;
     min-height: 75px;
     margin-right: 0;
