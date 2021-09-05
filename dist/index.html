@@ -5,7 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/src/styles/style.css">
-	<script src="main.js"></script>
+	<!-- <script src="main.js"></script> -->
+    <script src="/src/scripts/index.js" defer></script>
     <title>Todo List</title>
 </head>
 <body>
@@ -30,20 +31,21 @@
     <main class="flex flex-ai-c flex-col">
         <div class="container flex flex-ai-c flex-col">
             <div class="flex flex-ai-c">
-                <button class="arrow">
+                <button id="prev" class="arrow">
                     &#x02C2
                 </button>
                 <div id="quote-box" class="flex flex-jc-c flex-ai-c">
                     <div>
-                        <p>Yesterday is history. Tomorrow is a mystery, but today is a gift! That is why it is called the present.</p>
+                        <!-- <p>Yesterday is history. Tomorrow is a mystery, but today is a gift! That is why it is called the present.</p> -->
+                        <p id="quote"></p>
                     </div>
                 </div>
-                <button class="arrow">
+                <button id="next" class="arrow">
                     &#x02C3
                 </button>
             </div>
             <div id="carousel-circles" class="flex flex-ai-c">
-                <button class="circle"></button>
+                <button class="circle active"></button>
                 <button class="circle"></button>
                 <button class="circle"></button>
             </div>

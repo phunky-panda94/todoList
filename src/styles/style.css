@@ -146,6 +146,10 @@ nav {
     cursor: pointer;
 }
 
+.active {
+    background-color: #ACACA7;
+}
+
 .circle {
     border: transparent;
     border-radius: 50%;
