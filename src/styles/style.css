@@ -95,10 +95,12 @@ nav {
 .nav-btn {
     color: #ffffff;
     text-decoration: none;
+    text-align: center;
     padding-left: 10px;
     padding-right: 10px;
     margin-left: 10px;
     margin-right: 10px;
+    width: 75px;
 }
 
 .nav-right {
@@ -111,11 +113,11 @@ nav {
     width: 50px;
 }
 
-.selected {
+.selected, .nav-btn:hover {
     font-weight: 700;
 }
 
-.selected, .nav-btn:hover {
+.selected {
     background-color: #ffffff;
     border-radius: 10px;
     color: #2c2c2c;
