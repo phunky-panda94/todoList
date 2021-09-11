@@ -2,7 +2,7 @@
     box-sizing: border-box;
 }
 
-body {
+body, p {
     margin: 0;
     padding: 0;
 }
@@ -39,6 +39,10 @@ html {
 
 .flex-ai-fe {
     align-items: flex-end;
+}
+
+.flex-ai-s {
+    align-items:flex-start;
 }
 
 .flex-jc-sa {
@@ -392,13 +396,28 @@ nav {
 /* sidebar */
 
 .sidebar {
-    visibility: hidden;
+    visibility: visible;
     height: 100vh;
     width: 350px;
     position: fixed;
     left: 0;
     z-index: 1;
     background-color: #3c3c3c;
+}
+
+.sidebar > .container {
+    color: #848484;
+    /* border: 1px solid white; */
+    width: 325px;
+    margin: 10px;
+}
+
+.sidebar > .container > .container {
+    /* border: 1px solid white; */
+    color: #ACACA7;
+    width: 280px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .sidebar > .card {
@@ -413,4 +432,9 @@ nav {
 
 .sidebar > .card:hover {
     border: 2px solid #ffffff;
+}
+
+.line {
+    border: 1px solid #848484;
+    border-radius: 1em;
 }
