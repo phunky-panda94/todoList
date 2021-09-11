@@ -438,3 +438,61 @@ nav {
     border: 1px solid #848484;
     border-radius: 1em;
 }
+
+.dropdown, .task > input {
+    appearance: none;
+}
+
+.dropdown::before {
+    content: '\1433';
+    color: #ACACA7;
+    font-weight: 700;
+}
+
+.dropdown:checked::before {
+    content: '\1433';
+    color: #ACACA7;
+    font-weight: 700;
+    transform: rotate(90deg);
+}
+
+.dropdown:hover {
+    cursor: pointer;
+}
+
+.task {
+    /* border: 1px solid white; */
+    color: #ACACA7;
+    width: 250px;
+    margin-left: 40px;
+    padding: 10px;
+}
+
+.task > input::before {
+    content: '';
+    background-color: #ACACA7;
+    height: 2px;
+    width: 15px;
+    position: absolute;
+    right: 50px;
+}
+
+.task > input:checked::before, .task > input:checked::after {
+    content: '';
+    background-color: #ACACA7;
+    height: 2px;
+    width: 15px;
+    position: absolute;
+    right: 50px;
+}
+
+.task > input:checked::after {
+    transform: rotate(90deg);
+}
+
+.task > input:hover {
+    cursor: pointer;
+}
+
+
+
