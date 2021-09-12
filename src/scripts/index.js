@@ -1,5 +1,4 @@
 /* quote carousel */
-
 const quote = document.querySelector('#quote');
 const next = document.querySelector('#next');
 const prev = document.querySelector('#prev');
@@ -11,6 +10,7 @@ let quotes = [
     'One often meets his destiny on the road he takes to avoid it.',
     'If you only do what you can do, you will never be more than you are now.'
 ];
+
 let selectedQuote = 0;
 
 quote.textContent = quotes[selectedQuote];
@@ -72,7 +72,6 @@ circles.forEach(button => {
     
 
 /* sidebar */
-
 const menu = document.querySelector('#menu');
 const sidebar = document.querySelector('#sidebar');
 

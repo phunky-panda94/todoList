@@ -5,33 +5,34 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/style.css">
-	<script src="main.js"></script>
+	<!-- <script src="main.js"></script> -->
+    <script src="scripts/addTask.js" defer></script>
     <title>Todo List</title>
 </head>
 <body>
     <nav class="flex flex-ai-c">
         <div class="flex flex-ai-c">
-            <div id="hamburger-menu" class="flex flex-col flex-jc-sa">
+            <div id="menu" class="flex flex-col flex-jc-sa">
                 <span></span>
                 <span></span>
                 <span></span>
             </div>
             <a class="nav-btn" href="#">Today</a>
-            <a class="nav-btn selected" href="#">Tasks</a>
-            <a class="nav-btn" href="#">Projects</a>
+            <a class="nav-btn selected" href="/src/tasks.html">Tasks</a>
+            <a class="nav-btn" href="/src/projects.html">Projects</a>
         </div>
         <div class="nav-right flex flex-jc-fe">
             <div class="flex flex-ai-c ">
-                <img id="profile" src="images/phunky_panda.png" alt="profile">
+                <img id="profile" src="/src/images/phunky_panda.png" alt="profile">
                 <a class="nav-btn" href="#">Logout</a>
             </div>
         </div>
     </nav>
     <main class="flex flex-jc-c flex-col">
-        <div class="modal flex flex-jc-c flex-ai-c">
+        <div id="task-form" class="modal flex flex-jc-c flex-ai-c hidden">
             <div class="modal-content">
                 <form action="" class="flex flex-col flex-jc-sb">
-                    <span class="close flex flex-jc-fe flex-ai-fe">&times;</span>
+                    <span id="close" class="close flex flex-jc-fe flex-ai-fe">&times;</span>
                     <label for="task" class="flex flex-ai-c flex-jc-sb">
                         <span>Task</span>
                         <input type="text">
@@ -53,39 +54,39 @@
                 </form>
             </div>
         </div>
-        <div class="flex flex-jc-fe flex-ai-c">
-            <button href="#" class="add-btn flex flex-ai-c flex-jc-c"></button>
+        <div class="container flex flex-jc-fe flex-ai-c">
+            <button id="add-task" class="add-btn flex flex-ai-c flex-jc-c"></button>
         </div>
-        <div id="tasks" class="flex flex-row flex-jc-s flex-wrap">
+        <div class="container flex flex-row flex-jc-c flex-wrap">
             <div class="card">
-                <div class="heading flex flex-ai-c flex-jc-sb">
+                <label class="card-heading flex flex-ai-c flex-jc-sb">
                     <span>Todo List</span>
                     <input class="flex flex-ai-c flex-jc-c" type="checkbox" checked>
-                </div>
-                <div class="checkbox flex flex-ai-c">
+                </label>
+                <label class="checkbox flex flex-ai-c">
                     <input type="checkbox">
                     <span>Create a landing page</span>
-                </div>
+                </label>
             </div>
             <div class="card">
-                <div class="heading flex flex-ai-c flex-jc-sb">
+                <label class="card-heading flex flex-ai-c flex-jc-sb">
                     <span>Todo List</span>
                     <input class="flex flex-ai-c flex-jc-c" type="checkbox" checked>
-                </div>
-                <div class="checkbox flex flex-ai-c">
+                </label>
+                <label class="checkbox flex flex-ai-c">
                     <input type="checkbox">
                     <span>Create a tasks page</span>
-                </div>
+                </label>
             </div>
             <div class="card">
-                <div class="heading flex flex-ai-c flex-jc-sb">
+                <label class="card-heading flex flex-ai-c flex-jc-sb">
                     <span>Todo List</span>
                     <input class="flex flex-ai-c flex-jc-c" type="checkbox" checked>
-                </div>
-                <div class="checkbox flex flex-ai-c">
+                </label>
+                <label class="checkbox flex flex-ai-c">
                     <input type="checkbox">
                     <span>Create projects page</span>
-                </div>
+                </label>
             </div>
         </div>
     </main>
