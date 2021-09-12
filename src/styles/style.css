@@ -67,17 +67,17 @@ html {
 
 /* hamburger menu */
 
-#hamburger-menu {
+#menu {
     height: 30px;
     margin-left: 10px;
     margin-right: 10px;
 }
 
-#hamburger-menu:hover {
+#menu:hover {
     cursor: pointer;
 }
 
-#hamburger-menu > span {
+#menu > span {
     display: block;
     width: 33px;
     height: 4px;
@@ -85,7 +85,7 @@ html {
     border-radius: 3px;
 }
 
-#hamburger-menu:hover > span {
+#menu:hover > span {
     background-color: #ACACA7;
 }
 
@@ -395,8 +395,8 @@ nav {
 
 /* sidebar */
 
-.sidebar {
-    visibility: visible;
+#sidebar {
+    visibility: hidden;
     height: 100vh;
     width: 350px;
     position: fixed;
@@ -405,22 +405,20 @@ nav {
     background-color: #3c3c3c;
 }
 
-.sidebar > .container {
+#sidebar > .container {
     color: #848484;
-    /* border: 1px solid white; */
     width: 325px;
     margin: 10px;
 }
 
-.sidebar > .container > .container {
-    /* border: 1px solid white; */
+#sidebar > .container > .container {
     color: #ACACA7;
     width: 280px;
     margin-left: 10px;
     margin-right: 10px;
 }
 
-.sidebar > .card {
+#sidebar > .card {
     background-color: #80B24B;
     border: 2px solid #ACACA7;
     font-size: 18px;
@@ -430,13 +428,14 @@ nav {
     cursor: pointer;
 }
 
-.sidebar > .card:hover {
+#sidebar > .card:hover {
     border: 2px solid #ffffff;
 }
 
 .line {
     border: 1px solid #848484;
     border-radius: 1em;
+    margin-bottom: 10px;
 }
 
 .dropdown, .task > input {
@@ -447,6 +446,14 @@ nav {
     content: '\1433';
     color: #ACACA7;
     font-weight: 700;
+}
+
+.container > .dropdown + .tasks {
+    display: none;
+}
+
+.container > .dropdown:checked + .tasks {
+    display: block;
 }
 
 .dropdown:checked::before {
@@ -460,26 +467,19 @@ nav {
     cursor: pointer;
 }
 
-.task {
-    /* border: 1px solid white; */
-    color: #ACACA7;
+.tasks {
+    color: #E5E8E1;
     width: 250px;
-    margin-left: 40px;
+    margin-left: 10px;
+}
+
+.task {
     padding: 10px;
 }
 
-.task > input::before {
+.task > input::before, .task > input::after {
     content: '';
-    background-color: #ACACA7;
-    height: 2px;
-    width: 15px;
-    position: absolute;
-    right: 50px;
-}
-
-.task > input:checked::before, .task > input:checked::after {
-    content: '';
-    background-color: #ACACA7;
+    background-color: #E5E8E1;
     height: 2px;
     width: 15px;
     position: absolute;
@@ -487,6 +487,10 @@ nav {
 }
 
 .task > input:checked::after {
+    visibility: hidden;
+}
+
+.task > input::after {
     transform: rotate(90deg);
 }
 

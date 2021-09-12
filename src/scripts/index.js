@@ -1,3 +1,5 @@
+/* quote carousel */
+
 const quote = document.querySelector('#quote');
 const next = document.querySelector('#next');
 const prev = document.querySelector('#prev');
@@ -69,4 +71,17 @@ circles.forEach(button => {
 });
     
 
+/* sidebar */
 
+const menu = document.querySelector('#menu');
+const sidebar = document.querySelector('#sidebar');
+
+menu.addEventListener('click', () => {
+
+   if (sidebar.style.visibility == 'hidden') {
+       sidebar.style.visibility = 'visible';
+   } else {
+       sidebar.style.visibility = 'hidden';
+   }
+
+});
