@@ -78,10 +78,6 @@ const sidebar = document.querySelector('#sidebar');
 
 menu.addEventListener('click', () => {
 
-   if (sidebar.style.visibility == 'hidden') {
-       sidebar.style.visibility = 'visible';
-   } else {
-       sidebar.style.visibility = 'hidden';
-   }
+    sidebar.classList.toggle("hidden");
 
 });
