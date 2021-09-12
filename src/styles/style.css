@@ -2,7 +2,7 @@
     box-sizing: border-box;
 }
 
-body {
+body, p {
     margin: 0;
     padding: 0;
 }
@@ -41,6 +41,10 @@ html {
     align-items: flex-end;
 }
 
+.flex-ai-s {
+    align-items:flex-start;
+}
+
 .flex-jc-sa {
     justify-content: space-around;
 }
@@ -63,17 +67,17 @@ html {
 
 /* hamburger menu */
 
-#hamburger-menu {
+#menu {
     height: 30px;
     margin-left: 10px;
     margin-right: 10px;
 }
 
-#hamburger-menu:hover {
+#menu:hover {
     cursor: pointer;
 }
 
-#hamburger-menu > span {
+#menu > span {
     display: block;
     width: 33px;
     height: 4px;
@@ -81,7 +85,7 @@ html {
     border-radius: 3px;
 }
 
-#hamburger-menu:hover > span {
+#menu:hover > span {
     background-color: #ACACA7;
 }
 
@@ -95,10 +99,12 @@ nav {
 .nav-btn {
     color: #ffffff;
     text-decoration: none;
+    text-align: center;
     padding-left: 10px;
     padding-right: 10px;
     margin-left: 10px;
     margin-right: 10px;
+    width: 75px;
 }
 
 .nav-right {
@@ -112,11 +118,21 @@ nav {
 }
 
 .selected, .nav-btn:hover {
+    font-weight: 700;
+}
+
+.selected {
     background-color: #ffffff;
     border-radius: 10px;
     color: #2c2c2c;
     padding-top: 6px;
     padding-bottom: 6px;
+}
+
+.container {
+    padding: 10px;
+    width: 90vw;
+    z-index: 0;
 }
 
 /* carousel */
@@ -134,12 +150,8 @@ nav {
     cursor: pointer;
 }
 
-#carousel {
-    margin-top: 25px;
-}
-
-#carousel-circles {
-    margin: 10px;
+.active {
+    background-color: #ACACA7;
 }
 
 .circle {
@@ -163,10 +175,10 @@ nav {
     border-radius: 1em;
     color: #ffffff;
     font-style: italic;
-    height: 80px;
-    width: 60vw;
-    margin-left: 10px;
-    margin-right: 10px;
+    min-height: 80px;
+    min-width: 60vw;
+    margin: 10px;
+    padding: 15px;
 }
 
 .add-btn {
@@ -174,8 +186,6 @@ nav {
     background-color: transparent;
     border-radius: 50%;
     height: 50px;
-    margin-top: 15px;
-    margin-right: 7%;
     width: 50px;
 }
 
@@ -198,11 +208,6 @@ nav {
 
 /* tasks */
 
-#tasks {
-    padding-left: 50px;
-    padding-right: 50px;
-}
-
 .card {
     border: 2px solid #E5E8E1;
     border-radius: 1em;
@@ -210,11 +215,11 @@ nav {
     color: #ffffff;
     min-height: 200px;
     min-width: 300px;
-    width: 350px;
+    width: 325px;
     padding: 10px;
-    margin-top: 20px;
+    /* margin-top: 20px;
     margin-bottom: 20px;
-    margin-left: 20px;
+    margin-left: 20px; */
     margin-right: 20px;
 }
 
@@ -248,6 +253,45 @@ nav {
     position: relative;
     bottom: 3px;
     left: 3px;
+}
+
+.card-heading {
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+.card-heading > input {
+    visibility: hidden;
+}
+
+.card-heading > input::before {
+    content: '\2606';
+    color: #E5E8E1;
+    font-size: 30px;
+    position: absolute;
+    visibility: visible;
+}
+
+.card-heading > input:checked::before {
+    content: '\2605';
+    color: #3c3c3c;
+    font-size: 40px;
+    position: absolute;
+    visibility: visible;
+}
+
+.card-heading > input:checked::after {
+    content: '\2605';
+    color: #ffffff;
+    font-size: 20px;
+    position: relative;
+    top: 2px;
+    visibility: visible;
+}
+
+.card-heading > span {
+    font-weight: 600;
 }
 
 /* Modal */
@@ -349,40 +393,111 @@ nav {
     cursor: pointer;
 }
 
-.heading {
-    margin-left: 5px;
-    margin-right: 5px;
+/* sidebar */
+
+#sidebar {
+    height: 100vh;
+    width: 350px;
+    position: fixed;
+    left: 0;
+    z-index: 1;
+    background-color: #3c3c3c;
 }
 
-.heading > input {
+#sidebar > .container {
+    color: #848484;
+    width: 325px;
+    margin: 10px;
+}
+
+#sidebar > .container > .container {
+    color: #ACACA7;
+    width: 280px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#sidebar > .card {
+    background-color: #80B24B;
+    border: 2px solid #ACACA7;
+    font-size: 18px;
+    min-height: 75px;
+    margin-right: 0;
+    margin-top: 15px;
+    cursor: pointer;
+}
+
+#sidebar > .card:hover {
+    border: 2px solid #ffffff;
+}
+
+.line {
+    border: 1px solid #848484;
+    border-radius: 1em;
+    margin-bottom: 10px;
+}
+
+.dropdown, .task > input {
+    appearance: none;
+}
+
+.dropdown::before {
+    content: '\1433';
+    color: #ACACA7;
+    font-weight: 700;
+}
+
+.container > .dropdown + .tasks {
+    display: none;
+}
+
+.container > .dropdown:checked + .tasks {
+    display: block;
+}
+
+.dropdown:checked::before {
+    content: '\1433';
+    color: #ACACA7;
+    font-weight: 700;
+    transform: rotate(90deg);
+}
+
+.dropdown:hover {
+    cursor: pointer;
+}
+
+.tasks {
+    color: #E5E8E1;
+    width: 250px;
+    margin-left: 10px;
+}
+
+.task {
+    padding: 10px;
+}
+
+.task > input::before, .task > input::after {
+    content: '';
+    background-color: #E5E8E1;
+    height: 2px;
+    width: 15px;
+    position: absolute;
+    right: 50px;
+}
+
+.task > input:checked::after {
     visibility: hidden;
 }
 
-.heading > input::before {
-    content: '\2606';
-    color: #E5E8E1;
-    font-size: 30px;
-    position: absolute;
-    visibility: visible;
+.task > input::after {
+    transform: rotate(90deg);
 }
 
-.heading > input:checked::before {
-    content: '\2605';
-    color: #3c3c3c;
-    font-size: 40px;
-    position: absolute;
-    visibility: visible;
+.task > input:hover {
+    cursor: pointer;
 }
 
-.heading > input:checked::after {
-    content: '\2605';
-    color: #ffffff;
-    font-size: 20px;
-    position: relative;
-    top: 2px;
-    visibility: visible;
+.hidden {
+    visibility: hidden;
 }
 
-.heading > span {
-    font-weight: 600;
-}

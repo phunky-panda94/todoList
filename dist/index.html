@@ -1,16 +1,129 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/src/styles/style.css">
-	<script src="main.js"></script>
+	<!-- <script src="main.js"></script> -->
+    <script src="/src/scripts/index.js" defer></script>
     <title>Todo List</title>
 </head>
 <body>
-    <div id="content">
-
-    </div>
+    <nav class="flex flex-ai-c">
+        <div class="flex flex-ai-c">
+            <div id="menu" class="flex flex-col flex-jc-sa">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <a class="nav-btn selected" href="#">Today</a>
+            <a class="nav-btn" href="/src/tasks.html">Tasks</a>
+            <a class="nav-btn" href="/src/projects.html">Projects</a>
+        </div>
+        <div class="nav-right flex flex-jc-fe">
+            <div class="flex flex-ai-c ">
+                <img id="profile" src="/src/images/phunky_panda.png" alt="profile">
+                <a class="nav-btn" href="#">Logout</a>
+            </div>
+        </div>
+    </nav>
+    <main class="flex flex-ai-c flex-col">
+        <div id="sidebar" class="hidden">
+            <div class="container flex flex-col">
+                <p>Projects</p>
+                <div class="container flex flex-row flex-wrap flex-jc-sb">
+                    <p>Thoughts</p>
+                    <input class="dropdown flex flex-ai-c flex-jc-c" type="checkbox" checked>
+                    <div class="tasks flex flex-row flex-wrap flex-jc-sb">
+                        <div class="task flex flex-row flex-jc-sb">
+                            <p>Create landing page</p>
+                            <input class="flex flex-ai-c flex-jc-c" type="checkbox" checked>
+                        </div>
+                        <div class="task flex flex-row flex-jc-sb">
+                            <p>Create tasks page</p>
+                            <input class="flex flex-ai-c flex-jc-c" type="checkbox" checked>
+                        </div>
+                    </div>
+                </div>
+                <div class="line"></div>
+                <div class="container flex flex-row flex-wrap flex-jc-sb">
+                    <p>TodoList</p>
+                    <input class="dropdown flex flex-ai-c flex-jc-c" type="checkbox" checked>
+                    <div class="tasks flex flex-row flex-wrap flex-jc-sb">
+                        <div class="task flex flex-row flex-jc-sb">
+                            <p>Create landing page</p>
+                            <input class="flex flex-ai-c flex-jc-c" type="checkbox" checked>
+                        </div>
+                        <div class="task flex flex-row flex-jc-sb">
+                            <p>Create tasks page</p>
+                            <input class="flex flex-ai-c flex-jc-c" type="checkbox" checked>
+                        </div>
+                    </div>
+                </div>
+                <div class="line"></div>
+            </div>
+            
+            <div class="container flex flex-col">
+                <p>Unassigned tasks</p>
+            </div>
+        </div>
+        <div class="container flex flex-ai-c flex-col">
+            <div class="flex flex-ai-c">
+                <button id="prev" class="arrow">
+                    &#x02C2
+                </button>
+                <div id="quote-box" class="flex flex-jc-c flex-ai-c">
+                    <div>
+                        <p id="quote"></p>
+                    </div>
+                </div>
+                <button id="next" class="arrow">
+                    &#x02C3
+                </button>
+            </div>
+            <div id="carousel-circles" class="flex flex-ai-c">
+                <button class="circle active"></button>
+                <button class="circle"></button>
+                <button class="circle"></button>
+            </div>
+        </div>
+        <div class="container flex flex-jc-fe flex-ai-c">
+            <button href="#" class="add-btn flex flex-ai-c flex-jc-c"></button>
+        </div>
+        <div class="container flex flex-row flex-jc-c flex-wrap">
+            <div class="card">
+                <label class="card-heading flex flex-ai-c flex-jc-sb">
+                    <span>Todo List</span>
+                    <input class="flex flex-ai-c flex-jc-c" type="checkbox" checked>
+                </label>
+                <label class="checkbox flex flex-ai-c">
+                    <input type="checkbox">
+                    <span>Create a landing page</span>
+                </label>
+            </div>
+            <div class="card">
+                <label class="card-heading flex flex-ai-c flex-jc-sb">
+                    <span>Todo List</span>
+                    <input class="flex flex-ai-c flex-jc-c" type="checkbox" checked>
+                </label>
+                <label class="checkbox flex flex-ai-c">
+                    <input type="checkbox">
+                    <span>Create a tasks page</span>
+                </label>
+            </div>
+            <div class="card">
+                <label class="card-heading flex flex-ai-c flex-jc-sb">
+                    <span>Todo List</span>
+                    <input class="flex flex-ai-c flex-jc-c" type="checkbox" checked>
+                </label>
+                <label class="checkbox flex flex-ai-c">
+                    <input type="checkbox">
+                    <span>Create projects page</span>
+                </label>
+            </div>
+        </div>
+    </main>
 </body>
 </html>
