@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/style.css">
 	<!-- <script src="main.js"></script> -->
-    <script src="scripts/addTask.js" defer></script>
+    <script src="scripts/tasks.js" defer></script>
     <title>Todo List</title>
 </head>
 <body>
@@ -28,27 +28,27 @@
             </div>
         </div>
     </nav>
-    <main class="flex flex-jc-c flex-col">
-        <div id="task-form" class="modal flex flex-jc-c flex-ai-c hidden">
+    <main class="flex flex-col flex-ai-c">
+        <div class="modal flex flex-jc-c flex-ai-c hidden">
             <div class="modal-content">
-                <form action="" class="flex flex-col flex-jc-sb">
+                <form id="task-form" action="" class="flex flex-col flex-jc-sb">
                     <span id="close" class="close flex flex-jc-fe flex-ai-fe">&times;</span>
                     <label for="task" class="flex flex-ai-c flex-jc-sb">
                         <span>Task</span>
-                        <input type="text">
+                        <input name="task" type="text" required>
                     </label>
                     <label for="date" class="flex flex-ai-c flex-jc-sb">
                         <span>Due Date</span>
-                        <input type="date">
+                        <input name="date" type="date" required>
                     </label>
                     <label id="notes" for="notes" class="flex flex-jc-sb">
                         <span>Notes</span>
                         <textarea name="notes" id="" cols="30" rows="10"></textarea>
                     </label>
                     <div id="form-btns" class="flex flex-jc-fe">   
-                        <button class="form-btn action">Add</button>
+                        <button class="form-btn action" type="submit">Add</button>
                         <!-- <button class="form-btn action">Edit</button> -->
-                        <button class="form-btn cancel">Discard</button>
+                        <button class="form-btn cancel" type="button">Discard</button>
                         <!-- <button class="form-btn cancel">Cancel</button> -->
                     </div>
                 </form>
@@ -57,7 +57,7 @@
         <div class="container flex flex-jc-fe flex-ai-c">
             <button id="add-task" class="add-btn flex flex-ai-c flex-jc-c"></button>
         </div>
-        <div class="container flex flex-row flex-jc-c flex-wrap">
+        <div id="tasks-container" class="container flex flex-row flex-wrap">
             <div class="card">
                 <label class="card-heading flex flex-ai-c flex-jc-sb">
                     <span>Todo List</span>
@@ -68,7 +68,7 @@
                     <span>Create a landing page</span>
                 </label>
             </div>
-            <div class="card">
+            <!-- <div class="card">
                 <label class="card-heading flex flex-ai-c flex-jc-sb">
                     <span>Todo List</span>
                     <input class="flex flex-ai-c flex-jc-c" type="checkbox" checked>
@@ -87,7 +87,7 @@
                     <input type="checkbox">
                     <span>Create projects page</span>
                 </label>
-            </div>
+            </div> -->
         </div>
     </main>
 </body>
