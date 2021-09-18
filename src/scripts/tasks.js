@@ -1,4 +1,4 @@
-// TODO: implement local storage
+// TODO: implement local storage for tasks and projects
 let tasks = [];
 
 class Task {
@@ -33,12 +33,16 @@ function addTask(task) {
 }
 
 /* DOM */
-
 const btn = document.querySelector('#add-task');
 const add = document.querySelector('.action');
-const cancel = document.querySelector(".cancel");
+const cancel = document.querySelector('.cancel');
+const cards = document.querySelectorAll('.card');
 const modal = document.querySelector('.modal');
 const form = document.querySelector('#task-form');
+const project = document.querySelector('#project');
+const name = document.querySelector('#name');
+const date = document.querySelector('#date');
+const notes = document.querySelector('#notes-text');
 const cross = document.querySelector('#close');
 const container = document.querySelector('#tasks-container');
 
@@ -61,6 +65,36 @@ cancel.addEventListener('click', () => {
     form.reset();
 
 })
+
+cards.forEach(card => {
+
+    card.addEventListener('click', editTask);
+
+});
+
+function editTask(e) {
+
+    let taskIndex = e.currentTarget.id;
+
+    // populate with task details
+    let task = tasks[taskIndex];
+    project.value = task.project;
+    name.value = task.name;
+    date.value = task.dueDate;
+    notes.value = task.notes;
+
+    // change buttons
+    add.textContent = 'Save changes'
+    cancel.textContent = 'Cancel'
+
+    let deleteBtn = document.createElement('button');
+    deleteBtn.classList.add('form-btn', 'delete');
+    deleteBtn.textContent = 'Delete';
+    add.after(deleteBtn);
+
+    modal.classList.toggle('hidden');
+
+}
 
 form.addEventListener('submit', (e) => {
 
@@ -88,10 +122,11 @@ function updateTasks() {
     let task = tasks[tasks.length - 1];
 
     taskCard = document.createElement('div');
+    taskCard.id = tasks.length - 1;
     taskCard.classList.add('card');
 
     // project
-    let heading = document.createElement('label');
+    let heading = document.createElement('div');
     heading.classList.add('card-heading', 'flex', 'flex-ai-c', 'flex-jc-sb');
 
     let project = document.createElement('span');
@@ -104,7 +139,7 @@ function updateTasks() {
     heading.append(star);
 
     // task 
-    let taskItem = document.createElement('label');
+    let taskItem = document.createElement('div');
     taskItem.classList.add('checkbox', 'flex', 'flex-ai-c')
 
     let checkbox = document.createElement('input');
@@ -117,6 +152,7 @@ function updateTasks() {
 
     taskCard.append(heading);
     taskCard.append(taskItem);
+    taskCard.addEventListener('click', editTask);
     container.appendChild(taskCard);
 
 }

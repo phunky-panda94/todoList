@@ -7,14 +7,13 @@ body, p {
     padding: 0;
 }
 
-html, textarea, input {
+html, textarea, input, select {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 .border {
     border: 1px solid black;
 }
-
 
 /* flexbox */
 .flex {
@@ -187,6 +186,8 @@ nav {
     border-radius: 50%;
     height: 50px;
     width: 50px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .add-btn::before, .add-btn::after {
@@ -218,6 +219,7 @@ nav {
     width: 325px;
     padding: 10px;
     margin-right: 20px;
+    cursor: pointer;
 }
 
 .card > label {
@@ -312,7 +314,7 @@ nav {
     border: 1px solid #ACACA7;
     border-radius: 1em;
     height: 60vh;
-    width: 60vw;
+    min-width: 700px;
     padding: 40px;
 }
 
@@ -326,7 +328,7 @@ nav {
     width: 100%;
 }
 
-.modal-content > form > label > input {
+.modal-content > form > label > input, select {
     font-size: 18px;
     height: 40px;
 }
@@ -341,7 +343,7 @@ nav {
     font-size: 20px;
 }
 
-.modal-content > form > label > input, textarea {
+.modal-content > form > label > input, textarea, select {
     width: 85%;
 }
 
@@ -357,7 +359,7 @@ nav {
     color: #ffffff;
     margin-left: 10px;
     padding: 8px;
-    width: 75px;
+    min-width: 75px;
 }
 
 .action {
@@ -366,16 +368,26 @@ nav {
     background-color: #A4D454;
 }
 
+.delete {
+    border: 1px solid #E5E8E1;
+    border-radius: 0.5em;
+    background-color: #cf222e;
+}
+
 .cancel {
     border: 1px solid #E5E8E1;
     border-radius: 0.5em;
     background-color: #848484;
 }
 
-.action:hover, .cancel:hover {
+.action:hover, .cancel:hover, .delete:hover {
     cursor: pointer;
     padding: 6px;
     border: 2px solid #3c3c3c;
+}
+
+#close {
+    padding-bottom: 10px;
 }
 
 .close {
