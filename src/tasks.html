@@ -17,7 +17,7 @@
                 <span></span>
                 <span></span>
             </div>
-            <a class="nav-btn" href="#">Today</a>
+            <a class="nav-btn" href="/dist/index.html">Today</a>
             <a class="nav-btn selected" href="/src/tasks.html">Tasks</a>
             <a class="nav-btn" href="/src/projects.html">Projects</a>
         </div>
@@ -33,9 +33,13 @@
             <div class="modal-content">
                 <form id="task-form" action="" class="flex flex-col flex-jc-sb">
                     <span id="close" class="close flex flex-jc-fe flex-ai-fe">&times;</span>
-                    <label for="task" class="flex flex-ai-c flex-jc-sb">
+                    <label for="project" class="flex flex-ai-c flex-jc-sb">
+                        <span>Project</span>
+                        <input name="project" type="text" required>
+                    </label>
+                    <label for="name" class="flex flex-ai-c flex-jc-sb">
                         <span>Task</span>
-                        <input name="task" type="text" required>
+                        <input name="name" type="text" required>
                     </label>
                     <label for="date" class="flex flex-ai-c flex-jc-sb">
                         <span>Due Date</span>
@@ -59,14 +63,14 @@
         </div>
         <div id="tasks-container" class="container flex flex-row flex-wrap">
             <div class="card">
-                <label class="card-heading flex flex-ai-c flex-jc-sb">
+                <div class="card-heading flex flex-ai-c flex-jc-sb">
                     <span>Todo List</span>
                     <input class="flex flex-ai-c flex-jc-c" type="checkbox" checked>
-                </label>
-                <label class="checkbox flex flex-ai-c">
+                </div>
+                <div class="checkbox flex flex-ai-c">
                     <input type="checkbox">
                     <span>Create a landing page</span>
-                </label>
+                </div>
             </div>
             <!-- <div class="card">
                 <label class="card-heading flex flex-ai-c flex-jc-sb">

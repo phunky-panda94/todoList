@@ -217,9 +217,6 @@ nav {
     min-width: 300px;
     width: 325px;
     padding: 10px;
-    /* margin-top: 20px;
-    margin-bottom: 20px;
-    margin-left: 20px; */
     margin-right: 20px;
 }
 
@@ -228,13 +225,14 @@ nav {
 }
 
 .checkbox > input {
-    appearance: none; /* gets rid of default styling */
+    appearance: none; 
     border: 2px solid #ACACA7;
     border-radius: 50%;
     background-color: #ffffff;
     height: 30px;
     width: 30px;
     margin-right: 10px;
+    cursor: pointer;
 }
 
 .checkbox > input:checked {
@@ -243,6 +241,7 @@ nav {
 
 .checkbox > input:checked + span {
     text-decoration: line-through;
+    text-decoration-thickness: 2px;
 }
 
 .checkbox > input:checked::before {
@@ -263,6 +262,7 @@ nav {
 
 .card-heading > input {
     visibility: hidden;
+    cursor: pointer;
 }
 
 .card-heading > input::before {

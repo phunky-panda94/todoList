@@ -1,15 +1,21 @@
+// TODO: implement local storage
 let tasks = [];
 
 class Task {
 
-    constructor(task, dueDate, notes) {
-        this._task = task;
+    constructor(project, name, dueDate, notes) {
+        this._project = project;
+        this._name = name;
         this._dueDate = dueDate;
         this._notes = notes;
     }
 
-    get task () {
-        return this._task;
+    get project () {
+        return this._project;
+    }
+
+    get name () {
+        return this._name;
     }
 
     get dueDate() {
@@ -62,11 +68,11 @@ form.addEventListener('submit', (e) => {
 
     // create task object
     let task = new FormData(form);
-    let newTask = new Task(task.get('task'), task.get('date'), task.get('notes'));
+    let newTask = new Task(task.get('project'), task.get('name'), task.get('date'), task.get('notes'));
 
     // add task
     addTask(newTask);
-    console.log('Adding ' + task.get('task'))
+    console.log('Adding ' + task.get('name'))
     
     // close and reset form
     modal.classList.toggle('hidden');
@@ -84,14 +90,33 @@ function updateTasks() {
     taskCard = document.createElement('div');
     taskCard.classList.add('card');
 
+    // project
     let heading = document.createElement('label');
     heading.classList.add('card-heading', 'flex', 'flex-ai-c', 'flex-jc-sb');
 
+    let project = document.createElement('span');
+    project.textContent = task.project;
+    heading.append(project);
+
+    let star = document.createElement('input');
+    star.type = 'checkbox';
+    star.classList.add('flex', 'flex-ai-c', 'flex-jc-c');
+    heading.append(star);
+
+    // task 
+    let taskItem = document.createElement('label');
+    taskItem.classList.add('checkbox', 'flex', 'flex-ai-c')
+
+    let checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    taskItem.append(checkbox);
+
     let taskName = document.createElement('span');
-    taskName.textContent = task.task;
-    heading.append(taskName);
+    taskName.textContent = task.name;
+    taskItem.append(taskName);
 
     taskCard.append(heading);
+    taskCard.append(taskItem);
     container.appendChild(taskCard);
 
 }
