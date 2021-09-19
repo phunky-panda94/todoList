@@ -365,7 +365,7 @@ nav {
 .action {
     border: 1px solid #E5E8E1;
     border-radius: 0.5em;
-    background-color: #A4D454;
+    background-color: #80B24B;
 }
 
 .delete {
@@ -511,4 +511,8 @@ nav {
 
 .hidden {
     visibility: hidden;
+}
+
+.none {
+    display: none;
 }

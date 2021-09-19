@@ -36,6 +36,7 @@ function addTask(task) {
 const btn = document.querySelector('#add-task');
 const add = document.querySelector('.action');
 const cancel = document.querySelector('.cancel');
+const deleteBtn = document.querySelector('.delete');
 const cards = document.querySelectorAll('.card');
 const modal = document.querySelector('.modal');
 const form = document.querySelector('#task-form');
@@ -66,35 +67,13 @@ cancel.addEventListener('click', () => {
 
 })
 
+deleteBtn.addEventListener('click', deleteTask);
+
 cards.forEach(card => {
 
     card.addEventListener('click', editTask);
 
 });
-
-function editTask(e) {
-
-    let taskIndex = e.currentTarget.id;
-
-    // populate with task details
-    let task = tasks[taskIndex];
-    project.value = task.project;
-    name.value = task.name;
-    date.value = task.dueDate;
-    notes.value = task.notes;
-
-    // change buttons
-    add.textContent = 'Save changes'
-    cancel.textContent = 'Cancel'
-
-    let deleteBtn = document.createElement('button');
-    deleteBtn.classList.add('form-btn', 'delete');
-    deleteBtn.textContent = 'Delete';
-    add.after(deleteBtn);
-
-    modal.classList.toggle('hidden');
-
-}
 
 form.addEventListener('submit', (e) => {
 
@@ -119,10 +98,10 @@ form.addEventListener('submit', (e) => {
 
 function updateTasks() {
 
-    let task = tasks[tasks.length - 1];
+    let taskIndex = tasks.length -1
+    let task = tasks[taskIndex];
 
     taskCard = document.createElement('div');
-    taskCard.id = tasks.length - 1;
     taskCard.classList.add('card');
 
     // project
@@ -152,7 +131,50 @@ function updateTasks() {
 
     taskCard.append(heading);
     taskCard.append(taskItem);
+    taskCard.setAttribute('id', `task-${taskIndex}`)
+    taskCard.taskId = taskIndex;
     taskCard.addEventListener('click', editTask);
     container.appendChild(taskCard);
+
+}
+
+function editTask(e) {
+
+    let taskIndex = e.currentTarget.taskId;
+
+    // populate with task details
+    let task = tasks[taskIndex];
+    project.value = task.project;
+    name.value = task.name;
+    date.value = task.dueDate;
+    notes.value = task.notes;
+
+    // change buttons
+    add.textContent = 'Save changes'
+    cancel.textContent = 'Cancel'
+
+    deleteBtn.taskId = taskIndex;
+    deleteBtn.classList.toggle('none');
+    modal.classList.toggle('hidden');
+
+}
+
+function deleteTask(e) {
+    
+    let taskIndex = e.currentTarget.taskId;
+
+    // close and clear form
+    modal.classList.toggle('hidden');
+    form.reset();
+
+    // remove task from tasks
+    console.log(`taskId: ${taskIndex}`)
+    tasks.splice(taskIndex,1);
+    console.log(tasks);
+
+    // remove card
+    let taskToRemove = document.querySelector(`#task-${taskIndex}`);
+
+    taskToRemove.remove();
 
 }
