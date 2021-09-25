@@ -219,7 +219,7 @@ nav {
     width: 325px;
     padding: 10px;
     margin-right: 20px;
-    cursor: pointer;
+    /* cursor: pointer; */
 }
 
 .card > label {
@@ -296,6 +296,11 @@ nav {
     font-weight: 600;
 }
 
+.click-area {
+    height: 100px;
+    cursor: pointer;
+}
+
 /* Modal */
 
 .modal {
@@ -365,7 +370,7 @@ nav {
 .action {
     border: 1px solid #E5E8E1;
     border-radius: 0.5em;
-    background-color: #80B24B;
+    background-color: #A4D454;
 }
 
 .delete {

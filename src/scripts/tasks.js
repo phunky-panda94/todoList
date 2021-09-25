@@ -37,7 +37,7 @@ const btn = document.querySelector('#add-task');
 const add = document.querySelector('.action');
 const cancel = document.querySelector('.cancel');
 const deleteBtn = document.querySelector('.delete');
-const cards = document.querySelectorAll('.card');
+const cards = document.querySelectorAll('.click-area');
 const modal = document.querySelector('.modal');
 const form = document.querySelector('#task-form');
 const project = document.querySelector('#project');
@@ -129,11 +129,15 @@ function updateTasks() {
     taskName.textContent = task.name;
     taskItem.append(taskName);
 
+    let clickArea = document.createElement('div');
+    clickArea.classList.add('click-area', 'border');
+    clickArea.taskId = taskIndex;
+    clickArea.addEventListener('click', editTask);
+
     taskCard.append(heading);
     taskCard.append(taskItem);
+    taskCard.append(clickArea);
     taskCard.setAttribute('id', `task-${taskIndex}`)
-    taskCard.taskId = taskIndex;
-    taskCard.addEventListener('click', editTask);
     container.appendChild(taskCard);
 
 }
@@ -154,7 +158,7 @@ function editTask(e) {
     cancel.textContent = 'Cancel'
 
     deleteBtn.taskId = taskIndex;
-    deleteBtn.classList.toggle('none');
+    deleteBtn.style.display = 'block';
     modal.classList.toggle('hidden');
 
 }
