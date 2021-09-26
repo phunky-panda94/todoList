@@ -1,6 +1,3 @@
-// TODO: implement local storage for tasks and projects
-let tasks = [];
-
 class Task {
 
     constructor(id, project, name, dueDate, notes) {
@@ -49,10 +46,6 @@ class Task {
 
 }
 
-function addTask(task) {
-    tasks.push(task);
-}
-
 /* DOM */
 const btn = document.querySelector('#add-task');
 const add = document.querySelector('.action');
@@ -72,7 +65,7 @@ const container = document.querySelector('#tasks-container');
 
 btn.addEventListener('click', () => {
 
-    let taskId = tasks.length
+    let taskId = crypto.randomUUID();
     form.taskId = taskId;
     console.log(taskId);
     modal.classList.toggle('hidden');
@@ -116,7 +109,7 @@ form.addEventListener('submit', (e) => {
     e.preventDefault();
 
     // if task exists, update task
-    if (form.taskId in tasks) {
+    if (form.taskId in localStorage) {
 
         let task = new FormData(form);
         let existingTask = tasks[form.taskId]
@@ -151,10 +144,28 @@ form.addEventListener('submit', (e) => {
 })
 
 // functions
+function addTask(task) {
+   
+    let taskId = task.id;
+
+    localStorage.setItem(taskId,JSON.stringify(task));
+
+}
+
+function displayTasks() {
+
+    let tasks = Object.keys(localStorage);
+
+    for (let taskId of tasks) {
+        displayNewTask(taskId);
+    }
+
+}
 
 function displayNewTask(taskId) {
 
-    let task = tasks[taskId];
+    let task = JSON.parse(localStorage.getItem(taskId));
+    console.log(task);
 
     taskCard = document.createElement('div');
     taskCard.classList.add('card');
@@ -164,7 +175,7 @@ function displayNewTask(taskId) {
     heading.classList.add('card-heading', 'flex', 'flex-ai-c', 'flex-jc-sb');
 
     let project = document.createElement('span');
-    project.textContent = task.project;
+    project.textContent = task._project;
     heading.append(project);
 
     let star = document.createElement('input');
@@ -181,7 +192,7 @@ function displayNewTask(taskId) {
     taskItem.append(checkbox);
 
     let taskName = document.createElement('span');
-    taskName.textContent = task.name;
+    taskName.textContent = task._name;
     taskItem.append(taskName);
 
     let clickArea = document.createElement('div');
@@ -202,11 +213,11 @@ function editTask(e) {
     let taskId = e.currentTarget.taskId;
 
     // populate with task details
-    let task = tasks[taskId];
-    project.value = task.project;
-    name.value = task.name;
-    date.value = task.dueDate;
-    notes.value = task.notes;
+    let task = JSON.parse(localStorage.getItem(taskId));
+    project.value = task._project;
+    name.value = task._name;
+    date.value = task._dueDate;
+    notes.value = task._notes;
 
     // change buttons
     add.textContent = 'Save changes'
@@ -224,10 +235,8 @@ function deleteTask() {
     modal.classList.toggle('hidden');
     form.reset();
 
-    // remove task from tasks
-    console.log(`taskId: ${form.taskId}`)
-    tasks.splice(form.taskId,1);
-    console.log(`Tasks: ${tasks}`);
+    // remove task from local storage
+    localStorage.removeItem(form.taskId);
 
     // remove card
     let taskToRemove = document.querySelector(`#task-${form.taskId}`);
@@ -254,3 +263,5 @@ function updateTask(taskId) {
     form.reset();
 
 }
+
+displayTasks();
