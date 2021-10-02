@@ -123,18 +123,22 @@ form.addEventListener('submit', (e) => {
 
     e.preventDefault();
 
+    console.log(form.taskId);
+
     // if task exists, update task
-    if (form.taskId in localStorage) {
+    if (localStorage.getItem(form.taskId) != null) {
 
         let task = new FormData(form);
-        let existingTask = tasks[form.taskId]
+        let existingTask = JSON.parse(localStorage.getItem(form.taskId));
 
         existingTask.project = task.get('project');
         existingTask.name = task.get('name');
         existingTask.date = task.get('date');
         existingTask.notes = task.get('notes');
 
-        updateTask(form.taskId);
+        localStorage.setItem(form.taskId, JSON.stringify(existingTask));
+
+        updateTaskCard(form.taskId);
 
     // else add new task
     } else {
@@ -160,11 +164,7 @@ form.addEventListener('submit', (e) => {
 
 // functions
 function addTask(task) {
-   
-    let taskId = task.id;
-
-    localStorage.setItem(taskId,JSON.stringify(task));
-
+    localStorage.setItem(task.id,JSON.stringify(task));
 }
 
 function displayTasks() {
@@ -265,18 +265,17 @@ function deleteTask() {
 
 }
 
-function updateTask(taskId) {
+function updateTaskCard(taskId) {
 
     // get task
-    let updatedTask = tasks[taskId];
+    let updatedTask = JSON.parse(localStorage.getItem(taskId));
     console.log(updatedTask);
 
     // update details
     let project = document.querySelectorAll(`#${taskId} span`)[0];
-    console.log(project);
     project.textContent = updatedTask.project;
 
-    let taskName = document.querySelectorAll(`#${taskId} span`)[1];
+    let taskName = document.querySelectorAll(`#${taskId} span`)[2];
     taskName.textContent = updatedTask.name;
 
     modal.classList.toggle('hidden');
@@ -291,12 +290,12 @@ function calculateDaysLeft(taskDate) {
     let today = new Date();
 
     // calculate days left / overdue
-    let daysLeft = Math.floor((dueDate - today) / (1000 * 60 * 60 * 24));
+    let daysLeft = (dueDate - today) / (1000 * 60 * 60 * 24);
 
     if (daysLeft < 0) {
-        return `${daysLeft} days overdue`;
+        return `${Math.floor(Math.abs(daysLeft))} days overdue`;
     } else {
-        return `${Math.abs(daysLeft)} days left`;
+        return `${Math.floor(daysLeft)} days left`;
     }
 
 }
