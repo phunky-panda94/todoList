@@ -75,7 +75,7 @@ const name = document.querySelector('#name');
 const date = document.querySelector('#date');
 const notes = document.querySelector('#notes-text');
 const cross = document.querySelector('#close');
-const container = document.querySelector('#tasks-container');
+const container = document.querySelector('#todo');
 
 /* event listeners */
 btn.addEventListener('click', () => {
@@ -122,8 +122,6 @@ cards.forEach(card => {
 form.addEventListener('submit', (e) => {
 
     e.preventDefault();
-
-    console.log(form.taskId);
 
     // if task exists, update task
     if (localStorage.getItem(form.taskId) != null) {
@@ -180,7 +178,6 @@ function displayTasks() {
 function displayNewTask(taskId) {
 
     let task = JSON.parse(localStorage.getItem(taskId));
-    console.log(task);
 
     taskCard = document.createElement('div');
     taskCard.classList.add('card');
@@ -195,6 +192,9 @@ function displayNewTask(taskId) {
 
     let date = document.createElement('span');
     let daysLeft = calculateDaysLeft(task.date);
+    if (daysLeft.includes('overdue')) {
+        date.style.color = 'red';
+    }
     date.textContent = daysLeft;
     heading.append(date);
 
