@@ -1,73 +1,10 @@
-class Task {
-
-    #id;
-    #project;
-    #name;
-    #date;
-    #notes;
-
-    constructor(id, project, name, date, notes) {
-        this.#id = id;
-        this.#project = project;
-        this.#name = name;
-        this.#date = date;
-        this.#notes = notes;
-    }
-
-    get id() {
-        return this.#id;
-    }
-    
-    get project() {
-        return this.#project;
-    }
-
-    set project(project) {
-        this.#project = project;
-    }
-
-    get name() {
-        return this.#name;
-    }
-
-    set name(name) {
-        this.#name = name;
-    }
-
-    get date() {
-        return this.#date;
-    }
-
-    set date(date) {
-        this.#date = date;
-    }
-
-    get notes() {
-        return this.#notes;
-    }
-
-    set notes(notes) {
-        this.#notes = notes;
-    }
-
-    toJSON() {
-        return {
-            id: this.id,
-            project: this.project,
-            name: this.name,
-            date: this.date,
-            notes: this.notes
-        }
-    }
-
-}
+import Task from './task.js'
 
 /* DOM */
 const btn = document.querySelector('#add-task');
 const add = document.querySelector('.action');
 const cancel = document.querySelector('.cancel');
 const deleteBtn = document.querySelector('.delete');
-const cards = document.querySelectorAll('.click-area');
 const modal = document.querySelector('.modal');
 const form = document.querySelector('#task-form');
 const project = document.querySelector('#project');
@@ -75,14 +12,15 @@ const name = document.querySelector('#name');
 const date = document.querySelector('#date');
 const notes = document.querySelector('#notes-text');
 const cross = document.querySelector('#close');
-const container = document.querySelector('#todo');
+const todo = document.querySelector('#todo');
+const completed = document.querySelector('#completed');
+const checkboxes = document.querySelectorAll('.checkbox > input');
 
 /* event listeners */
 btn.addEventListener('click', () => {
 
     let taskId = crypto.randomUUID();
     form.taskId = taskId;
-    console.log(taskId);
     modal.classList.toggle('hidden');
 
 });
@@ -113,12 +51,6 @@ cancel.addEventListener('click', () => {
 
 deleteBtn.addEventListener('click', deleteTask);
 
-cards.forEach(card => {
-
-    card.addEventListener('click', editTask);
-
-});
-
 form.addEventListener('submit', (e) => {
 
     e.preventDefault();
@@ -136,14 +68,14 @@ form.addEventListener('submit', (e) => {
 
         localStorage.setItem(form.taskId, JSON.stringify(existingTask));
 
-        updateTaskCard(form.taskId);
+        updateTaskCard(existingTask);
 
     // else add new task
     } else {
 
         // create task object
         let task = new FormData(form);
-        let newTask = new Task(form.taskId, task.get('project'), task.get('name'), task.get('date'), task.get('notes'));
+        let newTask = new Task(form.taskId, task.get('project'), task.get('name'), task.get('date'), task.get('notes'), false);
 
         // add task
         addTask(newTask);
@@ -154,11 +86,11 @@ form.addEventListener('submit', (e) => {
         form.reset();
 
         // update display
-        displayNewTask(form.taskId);
+        displayTask(newTask);
 
     }
 
-})
+});
 
 // functions
 function addTask(task) {
@@ -168,18 +100,25 @@ function addTask(task) {
 function displayTasks() {
 
     let tasks = Object.keys(localStorage);
+    let task;
 
     for (let taskId of tasks) {
-        displayNewTask(taskId);
+
+        task = JSON.parse(localStorage.getItem(taskId));
+
+        if (task.complete) {
+            displayTask(task, completed);
+        } else {
+            displayTask(task, todo);
+        }
+
     }
 
 }
 
-function displayNewTask(taskId) {
+function displayTask(task, container) {
 
-    let task = JSON.parse(localStorage.getItem(taskId));
-
-    taskCard = document.createElement('div');
+    let taskCard = document.createElement('div');
     taskCard.classList.add('card');
 
     // project
@@ -192,9 +131,11 @@ function displayNewTask(taskId) {
 
     let date = document.createElement('span');
     let daysLeft = calculateDaysLeft(task.date);
+
     if (daysLeft.includes('overdue')) {
         date.style.color = 'red';
     }
+
     date.textContent = daysLeft;
     heading.append(date);
 
@@ -209,6 +150,13 @@ function displayNewTask(taskId) {
 
     let checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
+    checkbox.taskId = task.id;
+    checkbox.addEventListener('click', changeStatus);
+
+    if (task.complete) {
+        checkbox.checked = true;
+    }
+
     taskItem.append(checkbox);
 
     let taskName = document.createElement('span');
@@ -217,14 +165,14 @@ function displayNewTask(taskId) {
 
     let clickArea = document.createElement('div');
     clickArea.classList.add('click-area');
-    clickArea.taskId = taskId;
+    clickArea.taskId = task.id;
     clickArea.addEventListener('click', editTask);
 
     taskCard.append(heading);
     taskCard.append(taskItem);
     taskCard.append(clickArea);
-    taskCard.setAttribute('id', `${taskId}`)
-    container.appendChild(taskCard);
+    taskCard.setAttribute('id', `task-${task.id}`)
+    container.append(taskCard);
 
 }
 
@@ -259,24 +207,20 @@ function deleteTask() {
     localStorage.removeItem(form.taskId);
 
     // remove card
-    let taskToRemove = document.querySelector(`#${form.taskId}`);
+    let taskToRemove = document.querySelector(`#task-${form.taskId}`);
 
     taskToRemove.remove();
 
 }
 
-function updateTaskCard(taskId) {
-
-    // get task
-    let updatedTask = JSON.parse(localStorage.getItem(taskId));
-    console.log(updatedTask);
+function updateTaskCard(task) {
 
     // update details
-    let project = document.querySelectorAll(`#${taskId} span`)[0];
-    project.textContent = updatedTask.project;
+    let project = document.querySelectorAll(`#task-${task.id} span`)[0];
+    project.textContent = task.project;
 
-    let taskName = document.querySelectorAll(`#${taskId} span`)[2];
-    taskName.textContent = updatedTask.name;
+    let taskName = document.querySelectorAll(`#task-${task.id} span`)[2];
+    taskName.textContent = task.name;
 
     modal.classList.toggle('hidden');
     form.reset();
@@ -296,6 +240,28 @@ function calculateDaysLeft(taskDate) {
         return `${Math.floor(Math.abs(daysLeft))} days overdue`;
     } else {
         return `${Math.floor(daysLeft)} days left`;
+    }
+
+}
+
+function changeStatus(e) {
+
+    let taskId = e.currentTarget.taskId;
+    let taskCard = document.querySelector(`#task-${taskId}`);
+    let task = JSON.parse(localStorage.getItem(taskId));
+
+    taskCard.remove();
+
+    // if complete, change to false and move to todo
+    if (task.complete) {
+        task.complete = false;
+        localStorage.setItem(task.id,JSON.stringify(task));
+        todo.append(taskCard);
+    // if not complete, change to true and move to completed
+    } else {
+        task.complete = true;
+        localStorage.setItem(task.id,JSON.stringify(task));
+        completed.prepend(taskCard);
     }
 
 }
