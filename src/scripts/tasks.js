@@ -14,7 +14,6 @@ const notes = document.querySelector('#notes-text');
 const cross = document.querySelector('#close');
 const todo = document.querySelector('#todo');
 const completed = document.querySelector('#completed');
-const checkboxes = document.querySelectorAll('.checkbox > input');
 
 /* event listeners */
 btn.addEventListener('click', () => {
@@ -86,7 +85,7 @@ form.addEventListener('submit', (e) => {
         form.reset();
 
         // update display
-        displayTask(newTask);
+        displayTask(newTask, todo);
 
     }
 
