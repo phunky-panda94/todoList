@@ -1,3 +1,5 @@
+import { displayTodayTasks } from './taskFunctions.js';
+
 /* quote carousel */
 const quote = document.querySelector('#quote');
 const next = document.querySelector('#next');
@@ -70,7 +72,6 @@ circles.forEach(button => {
 
 });
     
-
 /* sidebar */
 const menu = document.querySelector('#menu');
 const sidebar = document.querySelector('#sidebar');
@@ -80,3 +81,8 @@ menu.addEventListener('click', () => {
     sidebar.classList.toggle("hidden");
 
 });
+
+// TODO: implement auto-rotate
+
+
+displayTodayTasks();

@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/src/styles/style.css">
 	<!-- <script src="main.js"></script> -->
-    <script src="/src/scripts/index.js" defer></script>
+    <script src="/src/scripts/index.js" type="module" defer></script>
     <title>Todo List</title>
 </head>
 <body>
@@ -89,40 +89,16 @@
                 <button class="circle"></button>
             </div>
         </div>
-        <div class="container flex flex-jc-fe flex-ai-c">
+        <div class="container flex flex-jc-sb flex-ai-c">
+            <h1>My Day</h1>
             <button href="#" class="add-btn flex flex-ai-c flex-jc-c"></button>
         </div>
-        <div class="container flex flex-row flex-jc-c flex-wrap">
-            <div class="card">
-                <label class="card-heading flex flex-ai-c flex-jc-sb">
-                    <span>Todo List</span>
-                    <input class="flex flex-ai-c flex-jc-c" type="checkbox" checked>
-                </label>
-                <label class="checkbox flex flex-ai-c">
-                    <input type="checkbox">
-                    <span>Create a landing page</span>
-                </label>
-            </div>
-            <div class="card">
-                <label class="card-heading flex flex-ai-c flex-jc-sb">
-                    <span>Todo List</span>
-                    <input class="flex flex-ai-c flex-jc-c" type="checkbox" checked>
-                </label>
-                <label class="checkbox flex flex-ai-c">
-                    <input type="checkbox">
-                    <span>Create a tasks page</span>
-                </label>
-            </div>
-            <div class="card">
-                <label class="card-heading flex flex-ai-c flex-jc-sb">
-                    <span>Todo List</span>
-                    <input class="flex flex-ai-c flex-jc-c" type="checkbox" checked>
-                </label>
-                <label class="checkbox flex flex-ai-c">
-                    <input type="checkbox">
-                    <span>Create projects page</span>
-                </label>
-            </div>
+        <div id="myday" class="container flex flex-row flex-wrap">
+        </div>
+        <div class="container flex flex-jc-sb flex-ai-c">
+            <h1>Completed</h1>
+        </div>
+        <div id="completed" class="container flex flex-row flex-wrap">
         </div>
     </main>
 </body>
