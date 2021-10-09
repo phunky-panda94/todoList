@@ -1,10 +1,4 @@
-const project = document.querySelector('#project');
-const name = document.querySelector('#name');
-const date = document.querySelector('#date');
-const notes = document.querySelector('#notes-text');
-const todo = document.querySelector('#todo');
-const completed = document.querySelector('#completed');
-const myDay = document.querySelector('#myday');
+import { add, cancel, deleteBtn, form, modal, project, name, date, notes } from './tasksDOM.js'
 
 export function addTask(task) {
     localStorage.setItem(task.id,JSON.stringify(task));

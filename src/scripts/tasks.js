@@ -1,15 +1,6 @@
 import Task from './task.js';
 import { updateTaskCard, displayTask, displayTasks, addTask, deleteTask } from './taskFunctions.js';
-
-/* DOM */
-const btn = document.querySelector('#add-task');
-const add = document.querySelector('.action');
-const cancel = document.querySelector('.cancel');
-const deleteBtn = document.querySelector('.delete');
-const modal = document.querySelector('.modal');
-const form = document.querySelector('#task-form');
-const cross = document.querySelector('#close');
-const todo = document.querySelector('#todo');
+import { btn, cross, deleteBtn, form, modal, add, cancel } from './tasksDOM.js';
 
 
 /* event listeners */
