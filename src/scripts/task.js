@@ -6,14 +6,16 @@ export default class Task {
     #date;
     #notes;
     #complete;
+    #today;
 
-    constructor(id, project, name, date, notes, complete) {
+    constructor(id, project, name, date, notes, complete, today) {
         this.#id = id;
         this.#project = project;
         this.#name = name;
         this.#date = date;
         this.#notes = notes;
         this.#complete = complete;
+        this.#today = today;
     }
 
     get id() {
@@ -60,6 +62,14 @@ export default class Task {
         this.#complete = status;
     }
 
+    get today() {
+        return this.#today;
+    }
+
+    set today(status) {
+        this.#today = status;
+    }
+
     toJSON() {
         return {
             id: this.id,
@@ -67,7 +77,8 @@ export default class Task {
             name: this.name,
             date: this.date,
             notes: this.notes,
-            complete: this.complete
+            complete: this.complete,
+            today: this.today
         }
     }
 

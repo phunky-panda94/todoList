@@ -1,5 +1,5 @@
 import Task from './task.js';
-import { updateTaskCard, displayTask, addTask, deleteTask } from './taskFunctions.js';
+import { updateTaskCard, displayTask, addTask, deleteTask, populateProjectsList } from './taskFunctions.js';
 import { openForm, closeForm, deleteBtn, form, modal, add, cancel } from './tasksDOM.js';
 
 /* event listeners */
@@ -7,6 +7,7 @@ export const openFormEvent = openForm.addEventListener('click', () => {
 
     let taskId = crypto.randomUUID();
     form.taskId = taskId;
+
     modal.classList.toggle('hidden');
 
 });
@@ -61,7 +62,15 @@ export const submitFormEvent = form.addEventListener('submit', (e) => {
 
         // create task object
         let task = new FormData(form);
-        let newTask = new Task(form.taskId, task.get('project'), task.get('name'), task.get('date'), task.get('notes'), false);
+        let newTask = new Task(
+            form.taskId, 
+            task.get('project'), 
+            task.get('name'), 
+            task.get('date'), 
+            task.get('notes'), 
+            false,
+            false
+        );
 
         // add task
         addTask(newTask);
