@@ -302,7 +302,6 @@ nav {
 }
 
 /* Modal */
-
 .modal {
     display: flex;
     position: fixed;
@@ -318,7 +317,6 @@ nav {
     background-color: white;
     border: 1px solid #ACACA7;
     border-radius: 1em;
-    height: 60vh;
     min-width: 700px;
     padding: 40px;
 }
@@ -411,7 +409,6 @@ nav {
 }
 
 /* sidebar */
-
 #sidebar {
     height: 100vh;
     width: 350px;
@@ -434,17 +431,21 @@ nav {
     margin-right: 10px;
 }
 
-#sidebar > .card {
-    background-color: #80B24B;
+#sidebar > .project-card {
     border: 2px solid #ACACA7;
-    font-size: 18px;
-    min-height: 75px;
-    margin-right: 0;
-    margin-top: 15px;
+    border-radius: 1em;
+    background-color: #80b24b;
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 500;
+    height: 70px;
+    width: 85%;
+    padding: 10px;
+    margin-top: 20px;
     cursor: pointer;
 }
 
-#sidebar > .card:hover {
+#sidebar > .project-card:hover {
     border: 2px solid #ffffff;
 }
 
