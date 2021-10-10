@@ -1,5 +1,5 @@
 import Task from './task.js';
-import { updateTaskCard, displayTask, addTask, deleteTask } from './taskFunctions.js';
+import { updateTaskCard, displayTask, addTask, deleteTask, populateProjectsList } from './taskFunctions.js';
 import { openForm, closeForm, deleteBtn, form, modal, add, cancel } from './tasksDOM.js';
 
 /* event listeners */
@@ -7,6 +7,9 @@ export const openFormEvent = openForm.addEventListener('click', () => {
 
     let taskId = crypto.randomUUID();
     form.taskId = taskId;
+
+    populateProjectsList();
+
     modal.classList.toggle('hidden');
 
 });

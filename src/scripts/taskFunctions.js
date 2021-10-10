@@ -260,3 +260,23 @@ export function toggleToday(e) {
     }
 
 }
+
+export function populateProjectsList() {
+
+    let projects = JSON.parse(localStorage.getItem('projects'));
+    let select = document.querySelector('#project');
+    let option;
+
+    projects.forEach(project => {
+
+        // create option
+        option = document.createElement('option');
+        option.value = project;
+        option.textContent = project;
+
+        // add to select 
+        select.append(option);
+
+    })
+
+}
