@@ -8,8 +8,6 @@ export const openFormEvent = openForm.addEventListener('click', () => {
     let taskId = crypto.randomUUID();
     form.taskId = taskId;
 
-    populateProjectsList();
-
     modal.classList.toggle('hidden');
 
 });

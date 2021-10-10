@@ -264,18 +264,17 @@ export function toggleToday(e) {
 export function populateProjectsList() {
 
     let projects = JSON.parse(localStorage.getItem('projects'));
-    let select = document.querySelector('#project');
     let option;
 
-    projects.forEach(project => {
+    projects.forEach(p => {
 
         // create option
         option = document.createElement('option');
-        option.value = project;
-        option.textContent = project;
+        option.value = p;
+        option.textContent = p;
 
         // add to select 
-        select.append(option);
+        project.append(option);
 
     })
 
