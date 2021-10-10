@@ -1,10 +1,15 @@
 import { displayTodayTasks } from './taskFunctions.js';
+import { openFormEvent } from './tasksEvents.js';
 
-/* quote carousel */
+/* DOM */
+// quote carousel
 const quote = document.querySelector('#quote');
 const next = document.querySelector('#next');
 const prev = document.querySelector('#prev');
 const circles = [...document.querySelector('#carousel-circles').children];
+// sidebar
+const menu = document.querySelector('#menu');
+const sidebar = document.querySelector('#sidebar');
 
 // TODO: pull 3 quotes from local storage 
 let quotes = [
@@ -19,6 +24,7 @@ let nextQuote;
 
 quote.textContent = quotes[selectedQuote];
 
+/* event listeners */
 next.addEventListener('click', () => {
     
     // display next quote
@@ -74,17 +80,15 @@ circles.forEach(button => {
 
 });
     
-/* sidebar */
-const menu = document.querySelector('#menu');
-const sidebar = document.querySelector('#sidebar');
-
 menu.addEventListener('click', () => {
 
     sidebar.classList.toggle("hidden");
 
 });
 
-// TODO: implement auto-rotate
+// add task to today
+openFormEvent;
 
+// TODO: implement auto-rotate
 
 displayTodayTasks();

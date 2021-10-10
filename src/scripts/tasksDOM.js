@@ -1,6 +1,6 @@
 /* DOM */
-export const btn = document.querySelector('#add-task');
-export const cross = document.querySelector('#close');
+export const openForm = document.querySelector('#open');
+export const closeForm = document.querySelector('#close');
 export const add = document.querySelector('.action');
 export const cancel = document.querySelector('.cancel');
 export const deleteBtn = document.querySelector('.delete');

@@ -89,9 +89,41 @@
                 <button class="circle"></button>
             </div>
         </div>
+        <div class="modal flex flex-jc-c flex-ai-c hidden">
+            <div class="modal-content">
+                <form id="task-form" action="" class="flex flex-col flex-jc-sb">
+                    <div id="close" class="flex flex-jc-fe flex-ai-fe">
+                        <span class="close">&times;</span>
+                    </div>
+                    <label for="project" class="flex flex-ai-c flex-jc-sb">
+                        <span>Project</span>
+                        <select id="project" name="project" required>
+                            <option value="TodoList">TodoList</option>
+                        </select>
+                    </label>
+                    <label for="name" class="flex flex-ai-c flex-jc-sb">
+                        <span>Task</span>
+                        <input id="name" name="name" type="text" required>
+                    </label>
+                    <label for="date" class="flex flex-ai-c flex-jc-sb">
+                        <span>Due Date</span>
+                        <input id="date" name="date" type="date" required>
+                    </label>
+                    <label id="notes" for="notes" class="flex flex-jc-sb">
+                        <span>Notes</span>
+                        <textarea id="notes-text" name="notes" cols="30" rows="10"></textarea>
+                    </label>
+                    <div id="form-btns" class="flex flex-jc-fe">   
+                        <button class="form-btn action" type="submit">Add</button>
+                        <button class="form-btn delete none" type="button">Delete</button>
+                        <button class="form-btn cancel" type="button">Discard</button>
+                    </div>
+                </form>
+            </div>
+        </div>
         <div class="container flex flex-jc-sb flex-ai-c">
             <h1>My Day</h1>
-            <button href="#" class="add-btn flex flex-ai-c flex-jc-c"></button>
+            <button id="open" href="#" class="add-btn flex flex-ai-c flex-jc-c"></button>
         </div>
         <div id="myday" class="container flex flex-row flex-wrap">
         </div>

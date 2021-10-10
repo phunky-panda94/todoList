@@ -1,4 +1,4 @@
-import { add, cancel, deleteBtn, form, modal, project, name, date, notes } from './tasksDOM.js'
+import { add, cancel, deleteBtn, form, modal, project, name, date, notes, myDay } from './tasksDOM.js'
 
 export function addTask(task) {
     localStorage.setItem(task.id,JSON.stringify(task));
@@ -50,6 +50,7 @@ export function displayTodayTasks() {
 
 }
 
+// TODO: refactor
 export function displayTask(task, container) {
 
     let taskCard = document.createElement('div');
