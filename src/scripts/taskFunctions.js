@@ -1,4 +1,4 @@
-import { add, cancel, deleteBtn, form, modal, project, name, date, notes, myDay } from './tasksDOM.js'
+import { add, cancel, deleteBtn, form, modal, project, name, date, notes, completed, todo, myDay } from './tasksDOM.js'
 
 export function addTask(task) {
     localStorage.setItem(task.id,JSON.stringify(task));
@@ -11,16 +11,12 @@ export function displayTasks() {
 
     for (let taskId of tasks) {
 
-        if (taskId != 'today') {
+        task = JSON.parse(localStorage.getItem(taskId));
 
-            task = JSON.parse(localStorage.getItem(taskId));
-
-            if (task.complete) {
-                displayTask(task, completed);
-            } else {
-                displayTask(task, todo);
-            }
-
+        if (task.complete) {
+            displayTask(task, completed);
+        } else {
+            displayTask(task, todo);
         }
 
     }
@@ -29,22 +25,16 @@ export function displayTasks() {
 
 export function displayTodayTasks() {
 
-    // retrieve today array
-    if (localStorage.getItem('today') != null) {
+    let tasks = Object.keys(localStorage);
+    let task;
 
-        let today = JSON.parse(localStorage.getItem('today'));
-        let task;
+    for (let taskId of tasks) {
 
-        // loop through today and display tasks only if not complete
-        for (let taskId of today) {
+        task = JSON.parse(localStorage.getItem(taskId));
 
-            task = JSON.parse(localStorage.getItem(taskId));
-
-            if (task.complete == false) {
-                displayTask(task, myDay);
-            }
-
-        }
+        if (task.today && ! task.complete) {
+            displayTask(task, myDay);
+        } 
 
     }
 
@@ -82,16 +72,9 @@ export function displayTask(task, container) {
     star.taskId = task.id;
     star.addEventListener('click', toggleToday);
 
-    // if in today, make checked
-    if (localStorage.getItem('today') != null) {
-
-        let today = JSON.parse(localStorage.getItem('today'));
-        
-        if (today.includes(task.id)) {
-            star.checked = true;
-        }    
-
-    }
+    if (task.today) {
+        star.checked = true;
+    }  
 
     heading.append(star);
 
@@ -224,54 +207,20 @@ export function changeStatus(e) {
 
     }
 
-
 }
 
 export function toggleToday(e) {
 
     let taskId = e.target.taskId
+    let task = JSON.parse(localStorage.getItem(taskId));
     
-    // if today exists, check if taskId in today
-    if (localStorage.getItem('today') != null) {
-
-        let today = JSON.parse(localStorage.getItem('today'));
-
-        // if in today, remove
-        if (today.includes(taskId)) {
-            removeFromToday(taskId);
-        // else, add
-        } else {
-            addToToday(taskId);
-        }
-
-    // else create new today array and store in local storage
+    if (task.today) {
+        task.today = false;
     } else {
-        let today = [taskId];
-        localStorage.setItem('today', JSON.stringify(today));
+        task.today = true;
     }
 
-}
-
-export function addToToday(taskId) {
-
-    // Add task id to today array
-    let today = JSON.parse(localStorage.getItem('today'));
-    today.push(taskId);
-    
-    // Store updated today array in local storage
-    localStorage.setItem('today', JSON.stringify(today));
-
-}
-
-export function removeFromToday(taskId) {
-
-    // Remove task id from today array
-    let today = JSON.parse(localStorage.getItem('today'));
-    let index = today.indexOf(taskId);
-    today.splice(index,1);
-
-    // Store updated today array in local storage
-    localStorage.setItem('today', JSON.stringify(today));
+    localStorage.setItem(taskId, JSON.stringify(task));
 
     if (myDay != null) {
         let taskCard = document.querySelector(`#task-${taskId}`);

@@ -61,7 +61,15 @@ export const submitFormEvent = form.addEventListener('submit', (e) => {
 
         // create task object
         let task = new FormData(form);
-        let newTask = new Task(form.taskId, task.get('project'), task.get('name'), task.get('date'), task.get('notes'), false);
+        let newTask = new Task(
+            form.taskId, 
+            task.get('project'), 
+            task.get('name'), 
+            task.get('date'), 
+            task.get('notes'), 
+            false,
+            false
+        );
 
         // add task
         addTask(newTask);
