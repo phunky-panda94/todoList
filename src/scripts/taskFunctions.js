@@ -1,22 +1,37 @@
 import { add, cancel, deleteBtn, form, modal, project, name, date, notes, completed, todo, myDay } from './tasksDOM.js'
 
 export function addTask(task) {
-    localStorage.setItem(task.id,JSON.stringify(task));
+
+    let tasks;
+
+    if (localStorage.getItem('tasks') != null) {
+        // JSON -> Object -> Map
+        tasks = new Map(Object.entries(JSON.parse(localStorage.getItem('tasks'))));
+        tasks.set(task.id,task);
+    } else {
+        tasks = new Map();
+        tasks.set(task.id,task);
+    }
+
+    // Map -> Object -> JSON
+    localStorage.setItem('tasks',JSON.stringify(Object.fromEntries(tasks)));
+
 }
 
 export function displayTasks() {
 
-    let tasks = Object.keys(localStorage);
-    let task;
+    if (localStorage.getItem('tasks') != null) {
 
-    for (let taskId of tasks) {
+        let tasks = new Map(Object.entries(JSON.parse(localStorage.getItem('tasks'))));
+        
+        for (let task of tasks.values()) {
+            
+            if (task.complete) {
+                displayTask(task, completed);
+            } else {
+                displayTask(task, todo);
+            }
 
-        task = JSON.parse(localStorage.getItem(taskId));
-
-        if (task.complete) {
-            displayTask(task, completed);
-        } else {
-            displayTask(task, todo);
         }
 
     }
@@ -25,16 +40,17 @@ export function displayTasks() {
 
 export function displayTodayTasks() {
 
-    let tasks = Object.keys(localStorage);
-    let task;
+    if (localStorage.getItem('tasks') != null) {
 
-    for (let taskId of tasks) {
+        let tasks = new Map(Object.entries(JSON.parse(localStorage.getItem('tasks'))));
 
-        task = JSON.parse(localStorage.getItem(taskId));
+        for (let task of tasks.values()) {
 
-        if (task.today && ! task.complete) {
-            displayTask(task, myDay);
-        } 
+            if (task.today && ! task.complete) {
+                displayTask(task, myDay);
+            } 
+
+        }
 
     }
 
@@ -115,7 +131,9 @@ export function editTask(e) {
     let taskId = e.target.taskId;
 
     // populate with task details
-    let task = JSON.parse(localStorage.getItem(taskId));
+    let tasks = new Map(Object.entries(JSON.parse(localStorage.getItem('tasks'))));;
+    let task = tasks.get(taskId);
+
     project.value = task.project;
     name.value = task.name;
     date.value = task.date;
@@ -133,15 +151,24 @@ export function editTask(e) {
 
 export function deleteTask() {
     
+    let taskId = form.taskId;
+
+    // change buttons
+    add.textContent = 'Add'
+    cancel.textContent = 'Discard'
+    deleteBtn.style.display = 'none';
+
     // close and clear form
     modal.classList.toggle('hidden');
     form.reset();
 
-    // remove task from local storage
-    localStorage.removeItem(form.taskId);
+    // remove task from map and update in local storage
+    let tasks = new Map(Object.entries(JSON.parse(localStorage.getItem('tasks'))));;
+    tasks.delete(taskId);
+    localStorage.setItem('tasks', JSON.stringify(Object.fromEntries(tasks)));
 
     // remove card
-    let taskToRemove = document.querySelector(`#task-${form.taskId}`);
+    let taskToRemove = document.querySelector(`#task-${taskId}`);
 
     taskToRemove.remove();
 
@@ -182,13 +209,15 @@ export function changeStatus(e) {
 
     let taskId = e.target.taskId;
     let taskCard = document.querySelector(`#task-${taskId}`);
-    let task = JSON.parse(localStorage.getItem(taskId));
+    let tasks = new Map(Object.entries(JSON.parse(localStorage.getItem('tasks'))));;
+    let task = tasks.get(taskId);
 
     // if complete, change to false and move to todo / myday
     if (task.complete) {
 
         task.complete = false;
-        localStorage.setItem(task.id,JSON.stringify(task));
+        tasks.set(taskId, task);
+        localStorage.setItem('tasks',JSON.stringify(Object.fromEntries(tasks)));
         
         if (todo != null) {
             todo.append(taskCard);
@@ -202,7 +231,8 @@ export function changeStatus(e) {
     } else {
 
         task.complete = true;
-        localStorage.setItem(task.id,JSON.stringify(task));
+        tasks.set(taskId, task);
+        localStorage.setItem('tasks',JSON.stringify(Object.fromEntries(tasks)));
         completed.prepend(taskCard);
 
     }
@@ -212,7 +242,8 @@ export function changeStatus(e) {
 export function toggleToday(e) {
 
     let taskId = e.target.taskId
-    let task = JSON.parse(localStorage.getItem(taskId));
+    let tasks = new Map(Object.entries(JSON.parse(localStorage.getItem('tasks'))));;
+    let task = tasks.get(taskId);
     
     if (task.today) {
         task.today = false;
@@ -220,7 +251,8 @@ export function toggleToday(e) {
         task.today = true;
     }
 
-    localStorage.setItem(taskId, JSON.stringify(task));
+    tasks.set(taskId, task);
+    localStorage.setItem('tasks', JSON.stringify(Object.fromEntries(tasks)));
 
     if (myDay != null) {
         let taskCard = document.querySelector(`#task-${taskId}`);
