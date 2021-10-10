@@ -14,11 +14,13 @@ let quotes = [
 ];
 
 let selectedQuote = 0;
+let previousQuote;
+let nextQuote;
 
 quote.textContent = quotes[selectedQuote];
 
 next.addEventListener('click', () => {
-
+    
     // display next quote
     if (selectedQuote == quotes.length - 1) {
         previousQuote = selectedQuote;
