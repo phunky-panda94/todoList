@@ -1,3 +1,8 @@
-// import { menu, menuEvent, sidebar } from './index.js'
+const menu = document.querySelector('#menu');
+const sidebar = document.querySelector('#sidebar');
 
-// menuEvent;
+menu.addEventListener('click', () => {
+
+    sidebar.classList.toggle("hidden");
+
+});

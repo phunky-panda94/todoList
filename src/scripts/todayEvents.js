@@ -69,7 +69,7 @@ circles.forEach(button => {
 
 });
     
-export const menuEvent = menu.addEventListener('click', () => {
+menu.addEventListener('click', () => {
 
     sidebar.classList.toggle("hidden");
 
