@@ -1,7 +1,6 @@
 /* DOM */
 const myProjects = document.querySelector('#projects');
 
-// TODO: display projects as cards
 export function displayProjects() {
 
     // get projects
@@ -17,7 +16,6 @@ export function displayProjects() {
 
 }
 
-// TODO: add project to local storage
 export function addProject(project) {
 
     let projects;
