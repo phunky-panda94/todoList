@@ -33,6 +33,9 @@ export function addTask() {
     }
 
     // TODO: if project specified, add task to project
+    if (newTask.project != '') {
+        addToProject(newTask);
+    }
 
     // Map -> Object -> JSON
     localStorage.setItem('tasks',JSON.stringify(Object.fromEntries(tasks)));
@@ -40,6 +43,27 @@ export function addTask() {
     console.log('adding new task card...');
     displayTask(newTask, todo);
 
+}
+
+function addToProject(task) {
+
+    // create project map if does not exist
+    if (localStorage.getItem('projects') == null) {
+
+        // get task project 
+        let projects = new Map(Object.entries(JSON.parse(localStorage.getItem('projects'))));
+        let projectTasks = projects.get(task.project);
+        
+        // add task id to project
+        projectTasks.push(task.id);
+        
+        // store updated project
+
+
+    } else {
+
+    }
+    
 }
 
 export function displayTasks() {
@@ -332,8 +356,6 @@ export function resetForm() {
     // change buttons
     deleteBtn.style.display = 'none';
     add.textContent = 'Add';
-
-    project.replaceChildren();
 
     form.reset();
 
