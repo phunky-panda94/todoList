@@ -46,10 +46,11 @@
                         <span>Project</span>
                         <input id="project" name="project" type="text" required>
                     </label>
-                    <!-- <label for="tasks" class="flex flex-jc-sb">
+                    <label id="tasks" for="tasks" class="flex flex-jc-sb none">
                         <span>Tasks</span>
-                        <textarea id="tasks" name="tasks" cols="30" rows="10"></textarea>
-                    </label> -->
+                        <div class="container flex flex-col flex-jc-sb">
+                        </div>
+                    </label>
                     <div id="form-btns" class="flex flex-jc-fe">   
                         <button class="form-btn action" type="submit">Add</button>
                         <button class="form-btn delete none" type="button">Delete</button>

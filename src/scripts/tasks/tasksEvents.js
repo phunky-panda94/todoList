@@ -38,6 +38,7 @@ export const cancelEvent = cancel.addEventListener('click', () => {
 
 export const deleteEvent = deleteBtn.addEventListener('click', deleteTask);
 
+// TODO: refactor to separate functions: updateTask, addTask
 export const submitFormEvent = form.addEventListener('submit', (e) => {
 
     e.preventDefault();

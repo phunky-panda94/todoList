@@ -1,5 +1,6 @@
 import { add, cancel, deleteBtn, form, modal, project, name, date, notes, completed, todo, myDay } from './tasksDOM.js'
 
+// TODO: refactor to create Task object and add to tasks map
 export function addTask(task) {
 
     let tasks;
@@ -12,6 +13,8 @@ export function addTask(task) {
         tasks = new Map();
         tasks.set(task.id,task);
     }
+
+    // TODO: if project specified, add task to project
 
     // Map -> Object -> JSON
     localStorage.setItem('tasks',JSON.stringify(Object.fromEntries(tasks)));
@@ -131,7 +134,7 @@ export function editTask(e) {
     let taskId = e.target.taskId;
 
     // populate with task details
-    let tasks = new Map(Object.entries(JSON.parse(localStorage.getItem('tasks'))));;
+    let tasks = new Map(Object.entries(JSON.parse(localStorage.getItem('tasks'))));
     let task = tasks.get(taskId);
 
     project.value = task.project;

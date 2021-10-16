@@ -1,5 +1,5 @@
-/* DOM */
-const myProjects = document.querySelector('#projects');
+import { deleteBtn, modal } from "../tasks/tasksDOM.js";
+import { actionBtn, cancelBtn, myProjects, tasks, tasksList, form } from "./projectsDOM.js";
 
 export function displayProjects() {
 
@@ -55,9 +55,11 @@ export function displayProject(project) {
 
     // create card
     let card = document.createElement('div');
+    card.project = project;
     card.style.cursor = 'pointer';
     card.classList.add('card', 'flex', 'flex-jc-c', 'flex-ai-c');
-
+    card.addEventListener('click', displayProjectDetails);
+    
     let name = document.createElement('h2');
     name.textContent = project;
 
@@ -68,4 +70,36 @@ export function displayProject(project) {
 
 }
 
-displayProjects();
+function displayProjectDetails(e) {
+
+    let project = e.target.project;
+    
+    // toggle modal
+    modal.classList.toggle('hidden');
+
+    // change buttons
+    deleteBtn.classList.toggle('none');
+    actionBtn.textContent = 'Save changes';
+    cancelBtn.textContent = 'Cancel';
+
+    // display tasks
+    tasks.classList.remove('none');
+    displayProjectTasks(project);
+
+    // add details
+    form.elements['project'].value = project;
+
+}
+
+function displayProjectTasks(project) {
+
+    // get project tasks
+
+
+    // create cards 
+
+
+    // add to tasksList
+
+}
+

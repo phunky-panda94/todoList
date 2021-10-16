@@ -1,0 +1,12 @@
+export const menu = document.querySelector('#menu');
+export const sidebar = document.querySelector('#sidebar');
+export const openForm = document.querySelector('#open');
+export const modal = document.querySelector('.modal');
+export const closeForm = document.querySelector('#close');
+export const form = document.querySelector('form');
+export const myProjects = document.querySelector('#projects');
+export const deleteBtn = document.querySelector('.delete');
+export const actionBtn = document.querySelector('.action');
+export const cancelBtn = document.querySelector('.cancel');
+export const tasks = document.querySelector('#tasks');
+export const tasksList = document.querySelector('#tasks > .container');
