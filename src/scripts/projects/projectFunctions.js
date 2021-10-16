@@ -16,6 +16,7 @@ export function displayProjects() {
 
 }
 
+// TODO: refactor to use Project object 
 export function addProject(project) {
 
     let projects;
