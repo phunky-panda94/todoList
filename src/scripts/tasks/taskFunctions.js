@@ -1,23 +1,44 @@
+import Task from './task.js';
 import { add, cancel, deleteBtn, form, modal, project, name, date, notes, completed, todo, myDay } from './tasksDOM.js'
 
-// TODO: refactor to create Task object and add to tasks map
-export function addTask(task) {
+function createNewTask() {
 
+    let task = new FormData(form);
+    let newTask = new Task(
+        form.taskId, 
+        task.get('project'), 
+        task.get('name'), 
+        task.get('date'), 
+        task.get('notes'), 
+        false,
+        false
+    );
+
+    return newTask;
+
+}
+
+export function addTask() {
+
+    let newTask = createNewTask();
     let tasks;
 
     if (localStorage.getItem('tasks') != null) {
         // JSON -> Object -> Map
         tasks = new Map(Object.entries(JSON.parse(localStorage.getItem('tasks'))));
-        tasks.set(task.id,task);
+        tasks.set(newTask.id,newTask);
     } else {
         tasks = new Map();
-        tasks.set(task.id,task);
+        tasks.set(newTask.id,newTask);
     }
 
     // TODO: if project specified, add task to project
 
     // Map -> Object -> JSON
     localStorage.setItem('tasks',JSON.stringify(Object.fromEntries(tasks)));
+
+    console.log('adding new task card...');
+    displayTask(newTask, todo);
 
 }
 
@@ -137,6 +158,8 @@ export function editTask(e) {
     let tasks = new Map(Object.entries(JSON.parse(localStorage.getItem('tasks'))));
     let task = tasks.get(taskId);
 
+    populateProjectsList();
+
     project.value = task.project;
     name.value = task.name;
     date.value = task.date;
@@ -172,8 +195,28 @@ export function deleteTask() {
 
     // remove card
     let taskToRemove = document.querySelector(`#task-${taskId}`);
-
     taskToRemove.remove();
+
+}
+
+export function updateTask() {
+
+    let task = new FormData(form);
+    let tasks = new Map(Object.entries(JSON.parse(localStorage.getItem('tasks'))));
+    let existingTask = tasks.get(form.taskId);
+
+    existingTask.project = task.get('project');
+    existingTask.name = task.get('name');
+    existingTask.date = task.get('date');
+    existingTask.notes = task.get('notes');
+
+    tasks.set(form.taskId, existingTask);
+
+    localStorage.setItem('tasks', JSON.stringify(Object.fromEntries(tasks)));
+
+    console.log('updating task card...');
+
+    updateTaskCard(existingTask);
 
 }
 
@@ -186,8 +229,7 @@ export function updateTaskCard(task) {
     let taskName = document.querySelectorAll(`#task-${task.id} span`)[2];
     taskName.textContent = task.name;
 
-    modal.classList.toggle('hidden');
-    form.reset();
+    console.log('task card updated');
 
 }
 
@@ -280,5 +322,19 @@ export function populateProjectsList() {
         project.append(option);
 
     })
+
+}
+
+export function resetForm() {
+
+    modal.classList.toggle('hidden');
+    
+    // change buttons
+    deleteBtn.style.display = 'none';
+    add.textContent = 'Add';
+
+    project.replaceChildren();
+
+    form.reset();
 
 }

@@ -1,6 +1,5 @@
-import Task from './task.js';
-import { updateTaskCard, displayTask, addTask, deleteTask, populateProjectsList } from './taskFunctions.js';
-import { openForm, closeForm, deleteBtn, form, modal, add, cancel } from './tasksDOM.js';
+import { updateTaskCard, displayTask, addTask, deleteTask, updateTask, populateProjectsList, resetForm } from './taskFunctions.js';
+import { openForm, closeForm, deleteBtn, form, modal, project, add, cancel } from './tasksDOM.js';
 
 /* event listeners */
 export const openFormEvent = openForm.addEventListener('click', () => {
@@ -8,81 +7,34 @@ export const openFormEvent = openForm.addEventListener('click', () => {
     let taskId = crypto.randomUUID();
     form.taskId = taskId;
 
+    populateProjectsList();
+
     modal.classList.toggle('hidden');
 
 });
 
-export const closeFormEvent = closeForm.addEventListener('click', () => {
+export const closeFormEvent = closeForm.addEventListener('click', resetForm);
 
-    modal.classList.toggle('hidden');
-    
-    // change buttons
-    deleteBtn.style.display = 'none';
-    add.textContent = 'Add';
-
-    form.reset();
-
-});
-
-export const cancelEvent = cancel.addEventListener('click', () => {
-
-    modal.classList.toggle('hidden');
-
-    // change buttons
-    deleteBtn.style.display = 'none';
-    add.textContent = 'Add';
-
-    form.reset();
-
-})
+export const cancelEvent = cancel.addEventListener('click', resetForm);
 
 export const deleteEvent = deleteBtn.addEventListener('click', deleteTask);
 
-// TODO: refactor to separate functions: updateTask, addTask
 export const submitFormEvent = form.addEventListener('submit', (e) => {
 
     e.preventDefault();
 
+    let tasks = new Map(Object.entries(JSON.parse(localStorage.getItem('tasks'))));
+
     // if task exists, update task
-    if (localStorage.getItem(form.taskId) != null) {
-
-        let task = new FormData(form);
-        let existingTask = JSON.parse(localStorage.getItem(form.taskId));
-
-        existingTask.project = task.get('project');
-        existingTask.name = task.get('name');
-        existingTask.date = task.get('date');
-        existingTask.notes = task.get('notes');
-
-        localStorage.setItem(form.taskId, JSON.stringify(existingTask));
-
-        updateTaskCard(existingTask);
-
+    if (tasks.get(form.taskId) != null) {
+        updateTask();
     // else add new task
     } else {
-
-        // create task object
-        let task = new FormData(form);
-        let newTask = new Task(
-            form.taskId, 
-            task.get('project'), 
-            task.get('name'), 
-            task.get('date'), 
-            task.get('notes'), 
-            false,
-            false
-        );
-
-        // add task
-        addTask(newTask);
-        
-        // close and reset form
-        modal.classList.toggle('hidden');
-        form.reset();
-
-        // update display
-        displayTask(newTask, todo);
-
+        addTask();
     }
+
+    // close and reset form
+    modal.classList.toggle('hidden');
+    form.reset();
 
 });
