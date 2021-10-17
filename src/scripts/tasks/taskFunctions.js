@@ -1,5 +1,5 @@
 import Task from './task.js';
-import { add, cancel, deleteBtn, form, modal, project, name, date, notes, completed, todo, myDay } from './tasksDOM.js'
+import { add, cancel, deleteBtn, form, modal, project, projectsList, name, date, notes, completed, todo, myDay } from './tasksDOM.js'
 
 function createNewTask() {
 
@@ -32,7 +32,6 @@ export function addTask() {
         tasks.set(newTask.id,newTask);
     }
 
-    // TODO: if project specified, add task to project
     if (newTask.project != '') {
         addToProject(newTask);
     }
@@ -40,29 +39,40 @@ export function addTask() {
     // Map -> Object -> JSON
     localStorage.setItem('tasks',JSON.stringify(Object.fromEntries(tasks)));
 
-    console.log('adding new task card...');
     displayTask(newTask, todo);
 
 }
 
 function addToProject(task) {
 
+    let projects;
+    let projectTasks;
+
     // create project map if does not exist
     if (localStorage.getItem('projects') == null) {
 
-        // get task project 
-        let projects = new Map(Object.entries(JSON.parse(localStorage.getItem('projects'))));
-        let projectTasks = projects.get(task.project);
-        
-        // add task id to project
-        projectTasks.push(task.id);
-        
-        // store updated project
-
+        projects = new Map();
+        projectTasks = [task.id];
 
     } else {
 
+        // get projects 
+        projects = new Map(Object.entries(JSON.parse(localStorage.getItem('projects'))));
+
+        // if new project, create project tasks array with task id
+        if (projects.get(task.project) == null) {
+            projectTasks = [task.id];
+        } else {
+            projectTasks = projects.get(task.project);
+            // add task id to project
+            projectTasks.push(task.id);
+        }
+        
     }
+
+    projects.set(task.project, projectTasks);
+        
+    localStorage.setItem('projects', JSON.stringify(Object.fromEntries(projects)));
     
 }
 
@@ -181,9 +191,7 @@ export function editTask(e) {
     // populate with task details
     let tasks = new Map(Object.entries(JSON.parse(localStorage.getItem('tasks'))));
     let task = tasks.get(taskId);
-
-    populateProjectsList();
-
+    
     project.value = task.project;
     name.value = task.name;
     date.value = task.date;
@@ -332,20 +340,24 @@ export function toggleToday(e) {
 
 export function populateProjectsList() {
 
-    let projects = JSON.parse(localStorage.getItem('projects'));
-    let option;
+    if (localStorage.getItem('projects') != null) {
 
-    projects.forEach(p => {
+        let projects = new Map(Object.entries(JSON.parse(localStorage.getItem('projects'))));
+        let option;
 
-        // create option
-        option = document.createElement('option');
-        option.value = p;
-        option.textContent = p;
+        projects.forEach(p => {
 
-        // add to select 
-        project.append(option);
+            // create option
+            option = document.createElement('option');
+            option.value = p;
+            option.textContent = p;
 
-    })
+            // add to select 
+            projectsList.append(option);
+
+        })
+
+    }
 
 }
 

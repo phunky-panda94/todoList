@@ -1,10 +1,10 @@
-import { updateTaskCard, displayTask, addTask, deleteTask, updateTask, populateProjectsList, resetForm } from './taskFunctions.js';
-import { openForm, closeForm, deleteBtn, form, modal, project, add, cancel } from './tasksDOM.js';
+import { addTask, deleteTask, updateTask, populateProjectsList, resetForm } from './taskFunctions.js';
+import { openForm, closeForm, deleteBtn, form, modal, cancel } from './tasksDOM.js';
 
 /* event listeners */
 export const openFormEvent = openForm.addEventListener('click', () => {
 
-    let taskId = crypto.randomUUID();
+    let taskId = String(Date.now());
     form.taskId = taskId;
 
     populateProjectsList();
@@ -23,12 +23,18 @@ export const submitFormEvent = form.addEventListener('submit', (e) => {
 
     e.preventDefault();
 
-    let tasks = new Map(Object.entries(JSON.parse(localStorage.getItem('tasks'))));
+    if (localStorage.getItem('tasks') != null) {
 
-    // if task exists, update task
-    if (tasks.get(form.taskId) != null) {
-        updateTask();
-    // else add new task
+        let tasks = new Map(Object.entries(JSON.parse(localStorage.getItem('tasks'))));
+
+        // if task exists, update task
+        if (tasks.get(form.taskId) != null) {
+            updateTask();
+        // else add new task
+        } else {
+            addTask();
+        }
+       
     } else {
         addTask();
     }

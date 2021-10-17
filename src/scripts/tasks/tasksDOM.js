@@ -6,6 +6,7 @@ export const cancel = document.querySelector('.cancel');
 export const deleteBtn = document.querySelector('.delete');
 export const modal = document.querySelector('.modal');
 export const form = document.querySelector('#task-form');
+export const projectsList = document.querySelector('#projects');
 export const project = document.querySelector('#project');
 export const name = document.querySelector('#name');
 export const date = document.querySelector('#date');
