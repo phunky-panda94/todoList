@@ -301,6 +301,10 @@ nav {
     cursor: pointer;
 }
 
+#projects > .card {
+    cursor: pointer;
+}
+
 /* Modal */
 .modal {
     display: flex;

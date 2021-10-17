@@ -1,14 +1,14 @@
-import { deleteBtn, modal } from "../tasks/tasksDOM.js";
+import Project from "./project.js";
+import { deleteBtn, modal, project } from "../tasks/tasksDOM.js";
 import { actionBtn, cancelBtn, myProjects, tasks, tasksList, form } from "./projectsDOM.js";
 
 export function displayProjects() {
 
-    // get projects
     if (localStorage.getItem('projects') != null) {
 
-        let projects = JSON.parse(localStorage.getItem('projects'));
+        let projects = new Map(Object.entries(JSON.parse(localStorage.getItem('projects'))));
 
-        for (let project of projects) {
+        for (let project of projects.values()) {
             displayProject(project);
         }
 
@@ -16,37 +16,44 @@ export function displayProjects() {
 
 }
 
-// TODO: refactor to use Project object 
-export function addProject(project) {
+export function addProject(projectName) {
 
+    // create Project object
+    let projectId = Date.now();
+    let project = new Project(projectId, projectName);
     let projects;
 
-    // if no projects, create new array
+    // if no projects, create new map
     if (localStorage.getItem('projects') == null) {
-        projects = [project];
+        projects = new Map();
     } else {
-        // Add project to project array
-        projects = JSON.parse(localStorage.getItem('projects'));
-        projects.push(project);
+        // Else, retrieve projects map
+        projects = new Map(Object.entries(JSON.parse(localStorage.getItem('projects'))));
     }
 
+    projects.set(project.id, project);
+
     // Store updated project array in local storage
-    localStorage.setItem('projects', JSON.stringify(projects));
+    localStorage.setItem('projects', JSON.stringify(Object.fromEntries(projects)));
+
+    // display task
+    displayProject(project);
 
 }
 
 export function removeProject(project) {
 
     // Remove project from project array
-    let projects = JSON.parse(localStorage.getItem('projects'));
-    let index = projects.indexOf(project);
-    projects.splice(index,1);
+    let projects = new Map(Object.entries(JSON.parse(localStorage.getItem('projects'))));
+    projects.delete(project.id);
 
     // Store updated project array in local storage
-    localStorage.setItem('project', JSON.stringify(projects));
+    localStorage.setItem('projects', JSON.stringify(Object.fromEntries(projects)));
+
+    // TODO: remove related tasks
 
     if (myProjects != null) {
-        let projectCard = document.querySelector(`#${project}`);
+        let projectCard = document.querySelector(`#project-${project.id}`);
         projectCard.remove();
     }
 
@@ -56,13 +63,13 @@ export function displayProject(project) {
 
     // create card
     let card = document.createElement('div');
-    card.project = project;
-    card.style.cursor = 'pointer';
+    card.project = project.name;
     card.classList.add('card', 'flex', 'flex-jc-c', 'flex-ai-c');
+    card.setAttribute('id',`project-${project.id}`);
     card.addEventListener('click', displayProjectDetails);
     
     let name = document.createElement('h2');
-    name.textContent = project;
+    name.textContent = project.name;
 
     card.append(name);
 

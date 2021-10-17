@@ -1,6 +1,5 @@
-import { deleteBtn } from "../tasks/tasksDOM.js";
-import { addProject, displayProject } from "./projectFunctions.js";
-import { menu, openForm, closeForm, form, modal, actionBtn, cancelBtn, tasks } from "./projectsDOM.js";
+import { addProject, displayProject, removeProject } from "./projectFunctions.js";
+import { menu, openForm, closeForm, form, modal, actionBtn, deleteBtn, cancelBtn, tasks } from "./projectsDOM.js";
 
 export const toggleMenu = menu.addEventListener('click', () => {
 
@@ -36,7 +35,15 @@ export const formEvent = form.addEventListener('submit', (e) => {
     modal.classList.toggle('hidden');
     form.reset();
 
-    displayProject(project);
-
 });
+
+export const deleteProject = deleteBtn.addEventListener('click', () => {
+
+    // TODO: confirmation
+
+    let project = form.elements['project'].value;
+    
+    removeProject(project);
+
+})
 
