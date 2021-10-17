@@ -63,7 +63,7 @@ export function displayProject(project) {
 
     // create card
     let card = document.createElement('div');
-    card.project = project.name;
+    card.project = project;
     card.classList.add('card', 'flex', 'flex-jc-c', 'flex-ai-c');
     card.setAttribute('id',`project-${project.id}`);
     card.addEventListener('click', displayProjectDetails);
@@ -95,19 +95,30 @@ function displayProjectDetails(e) {
     displayProjectTasks(project);
 
     // add details
-    form.elements['project'].value = project;
+    form.elements['project'].value = project.name;
 
 }
 
 function displayProjectTasks(project) {
 
     // get project tasks
-
-
+    let tasks = project.tasks;
+    console.log(tasks);
     // create cards 
+    for (let task of tasks) {
 
+        let card = document.createElement('div');
+        card.classList.add('card');
+        
+        let taskName = document.createElement('p');
+        taskName.textContent = task.name;
 
-    // add to tasksList
+        card.append(taskName);
+        console.log(`adding ${task.name}`);
+        // add to tasksList
+        tasksList.append(card);
+
+    }
 
 }
 

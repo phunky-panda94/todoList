@@ -43,6 +43,8 @@ export function addTask() {
 
 }
 
+
+// TODO: refactor to use Project object
 function addToProject(task) {
 
     let projects;
@@ -377,12 +379,12 @@ export function populateProjectsList() {
         let projects = new Map(Object.entries(JSON.parse(localStorage.getItem('projects'))));
         let option;
 
-        for (let project of projects.keys()) {
+        for (let project of projects.values()) {
 
             // create option
             option = document.createElement('option');
-            option.value = project;
-            option.textContent = project;
+            option.value = project.name;
+            option.textContent = project.name;
             
             // add to select 
             projectsList.append(option);
