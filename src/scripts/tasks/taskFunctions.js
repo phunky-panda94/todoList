@@ -76,6 +76,27 @@ function addToProject(task) {
     
 }
 
+function updateProjects(taskId) {
+
+    // TODO: if project specified and task not in project tasks, add to project
+    if (existingTask.project != '') {
+        
+        let projects = new Map(Object.entries(JSON.parse(localStorage.getItem('projects'))));
+        let projectTasks = projects.get(existingTask.project);
+
+        if (! projectTasks.includes(existingTask.id)) {
+            
+            projectTasks.push(existingTask.id);
+            projects.set(existingTask.project, projectTasks);
+            
+            localStorage.setItem('projects', JSON.stringify(Object.fromEntries(projects)));
+
+        }
+
+    }
+
+}
+
 export function displayTasks() {
 
     if (localStorage.getItem('tasks') != null) {
@@ -115,7 +136,7 @@ export function displayTodayTasks() {
 }
 
 // TODO: refactor
-export function displayTask(task, container) {
+function displayTask(task, container) {
 
     let taskCard = document.createElement('div');
     taskCard.classList.add('card');
@@ -242,17 +263,18 @@ export function updateTask() {
     existingTask.date = task.get('date');
     existingTask.notes = task.get('notes');
 
+    // TODO: update project tasks
+    updateProjects(form.taskId);
+
     tasks.set(form.taskId, existingTask);
 
     localStorage.setItem('tasks', JSON.stringify(Object.fromEntries(tasks)));
-
-    console.log('updating task card...');
 
     updateTaskCard(existingTask);
 
 }
 
-export function updateTaskCard(task) {
+function updateTaskCard(task) {
 
     // update details
     let project = document.querySelectorAll(`#task-${task.id} span`)[0];
@@ -260,8 +282,6 @@ export function updateTaskCard(task) {
 
     let taskName = document.querySelectorAll(`#task-${task.id} span`)[2];
     taskName.textContent = task.name;
-
-    console.log('task card updated');
 
 }
 
@@ -345,17 +365,17 @@ export function populateProjectsList() {
         let projects = new Map(Object.entries(JSON.parse(localStorage.getItem('projects'))));
         let option;
 
-        projects.forEach(p => {
+        for (let project of projects.keys()) {
 
             // create option
             option = document.createElement('option');
-            option.value = p;
-            option.textContent = p;
+            option.value = project;
+            option.textContent = project;
 
             // add to select 
             projectsList.append(option);
 
-        })
+        }
 
     }
 
