@@ -40,7 +40,6 @@ export const submitFormEvent = form.addEventListener('submit', (e) => {
     }
 
     // close and reset form
-    modal.classList.toggle('hidden');
-    form.reset();
+    resetForm();
 
 });

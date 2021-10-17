@@ -76,24 +76,21 @@ function addToProject(task) {
     
 }
 
-function updateProjects(taskId) {
+function removeFromProject(task) {
 
-    // TODO: if project specified and task not in project tasks, add to project
-    if (existingTask.project != '') {
+    let projects = new Map(Object.entries(JSON.parse(localStorage.getItem('projects'))));
+
+    let prevProjectTasks = projects.get(task.project);
         
-        let projects = new Map(Object.entries(JSON.parse(localStorage.getItem('projects'))));
-        let projectTasks = projects.get(existingTask.project);
-
-        if (! projectTasks.includes(existingTask.id)) {
-            
-            projectTasks.push(existingTask.id);
-            projects.set(existingTask.project, projectTasks);
-            
-            localStorage.setItem('projects', JSON.stringify(Object.fromEntries(projects)));
-
+        for (let index = 0; index < prevProjectTasks.length; index++) {
+            if (prevProjectTasks[index] == task.id) {
+                prevProjectTasks.splice(index,1);
+            }
         }
+    
+    projects.set(task.project, prevProjectTasks);
 
-    }
+    localStorage.setItem('projects', JSON.stringify(Object.fromEntries(projects)));
 
 }
 
@@ -226,6 +223,8 @@ export function editTask(e) {
     form.taskId = taskId;
     modal.classList.toggle('hidden');
 
+    populateProjectsList();
+
 }
 
 export function deleteTask() {
@@ -258,13 +257,26 @@ export function updateTask() {
     let tasks = new Map(Object.entries(JSON.parse(localStorage.getItem('tasks'))));
     let existingTask = tasks.get(form.taskId);
 
-    existingTask.project = task.get('project');
+    if (existingTask.project != task.get('project')) {
+        
+        let prevProject = existingTask.project;
+        let newProject = task.get('project');
+
+        if (prevProject != '') {
+            removeFromProject(existingTask);
+        }
+
+        existingTask.project = task.get('project');
+
+        if (newProject != '') {
+            addToProject(existingTask);
+        }
+
+    }
+
     existingTask.name = task.get('name');
     existingTask.date = task.get('date');
     existingTask.notes = task.get('notes');
-
-    // TODO: update project tasks
-    updateProjects(form.taskId);
 
     tasks.set(form.taskId, existingTask);
 
@@ -371,7 +383,7 @@ export function populateProjectsList() {
             option = document.createElement('option');
             option.value = project;
             option.textContent = project;
-
+            
             // add to select 
             projectsList.append(option);
 
@@ -388,6 +400,8 @@ export function resetForm() {
     // change buttons
     deleteBtn.style.display = 'none';
     add.textContent = 'Add';
+
+    projectsList.replaceChildren();
 
     form.reset();
 
