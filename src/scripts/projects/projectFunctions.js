@@ -112,23 +112,42 @@ function displayProjectDetails(e) {
 function displayProjectTasks(project) {
 
     // get project tasks
-    let tasks = project.tasks;
-    
-    // create cards 
-    for (let task of tasks) {
+    let tasks = new Map(Object.entries(JSON.parse(localStorage.getItem('tasks'))));
+    let task;
+
+    tasksList.replaceChildren();
+
+    project.tasks.map(taskId => {
+
+        task = tasks.get(taskId);
 
         let card = document.createElement('div');
-        card.classList.add('card');
+        card.task = task;
+        card.classList.add('card', 'flex', 'flex-jc-sb');
         
         let taskName = document.createElement('p');
         taskName.textContent = task.name;
 
+        // TODO: implement edit and delete task functionality
+        let editIcon = document.createElement('span');
+        editIcon.classList.add('material-icons-outlined');
+        editIcon.textContent = 'edit';
+
+        let deleteIcon = document.createElement('span');
+        deleteIcon.classList.add('material-icons-outlined');
+        deleteIcon.textContent = 'delete_outline';
+
+        let buttons = document.createElement('div');
+        buttons.append(editIcon);
+        buttons.append(deleteIcon);
+
         card.append(taskName);
+        card.append(buttons);
 
         // add to tasksList
         tasksList.append(card);
 
-    }
+    });
 
 }
 

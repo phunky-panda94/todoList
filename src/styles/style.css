@@ -361,15 +361,20 @@ nav {
 }
 
 .modal-content > form > label > .container > .card {
+    background-color: #A4D454;
     border-radius: 0.5em;
     width: 100%;
-    min-height: 50px;
+    min-height: 0;
     margin: 0;
-    margin-bottom: 10px;
 }
 
-#notes {
-    /* height: 100%; */
+.material-icons-outlined {
+    margin-left: 10px;
+}
+
+.material-icons-outlined:hover {
+    color: #2c2c2c;
+    cursor: pointer;
 }
 
 #form-btns {
