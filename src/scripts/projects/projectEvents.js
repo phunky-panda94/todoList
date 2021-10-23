@@ -37,13 +37,20 @@ export const formEvent = form.addEventListener('submit', (e) => {
 
 });
 
-export const deleteProject = deleteBtn.addEventListener('click', () => {
+export const deleteProject = deleteBtn.addEventListener('click', (e) => {
 
-    // TODO: confirmation
+    let confirmation = confirm('Are you sure? This action cannot be reversed');
 
-    let project = form.elements['project'].value;
+    if (confirmation) {
+
+        let projectId = e.currentTarget.projectId;
+        removeProject(projectId);
+        
+        modal.classList.toggle('hidden');
+        form.reset();
+
+    }
+
     
-    removeProject(project);
-
 })
 

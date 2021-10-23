@@ -1,6 +1,7 @@
 import Project from "./project.js";
-import { deleteBtn, modal, project } from "../tasks/tasksDOM.js";
+import { deleteBtn, modal } from "../tasks/tasksDOM.js";
 import { actionBtn, cancelBtn, myProjects, tasks, tasksList, form } from "./projectsDOM.js";
+import { projectsList } from "../tasks/tasksDOM.js";
 
 export function displayProjects() {
 
@@ -19,9 +20,9 @@ export function displayProjects() {
 export function addProject(projectName) {
 
     // create Project object
-    let projectId = Date.now();
-    let project = new Project(projectId, projectName);
+    let project = new Project(projectName);
     let projects;
+    
 
     // if no projects, create new map
     if (localStorage.getItem('projects') == null) {
@@ -41,21 +42,29 @@ export function addProject(projectName) {
 
 }
 
-export function removeProject(project) {
-
-    // Remove project from project array
+export function removeProject(projectId) {
+    
     let projects = new Map(Object.entries(JSON.parse(localStorage.getItem('projects'))));
-    projects.delete(project.id);
+    let project = projects.get(projectId);
+    let tasks = new Map(Object.entries(JSON.parse(localStorage.getItem('tasks'))));
 
-    // Store updated project array in local storage
+    for (let task of project.tasks) {
+        tasks.delete(task);
+    }
+
+    localStorage.setItem('tasks', JSON.stringify(Object.fromEntries(tasks)));
+
+    // remove project
+    projects.delete(projectId);
     localStorage.setItem('projects', JSON.stringify(Object.fromEntries(projects)));
 
-    // TODO: remove related tasks
-
+    // remove project card
     if (myProjects != null) {
-        let projectCard = document.querySelector(`#project-${project.id}`);
+        let projectCard = document.querySelector(`#project-${projectId}`);
         projectCard.remove();
     }
+
+    
 
 }
 
@@ -80,13 +89,14 @@ export function displayProject(project) {
 
 function displayProjectDetails(e) {
 
-    let project = e.target.project;
+    let project = e.currentTarget.project;
     
     // toggle modal
     modal.classList.toggle('hidden');
 
     // change buttons
-    deleteBtn.classList.toggle('none');
+    deleteBtn.projectId = project.id;
+    deleteBtn.classList.remove('none');
     actionBtn.textContent = 'Save changes';
     cancelBtn.textContent = 'Cancel';
 
@@ -103,7 +113,7 @@ function displayProjectTasks(project) {
 
     // get project tasks
     let tasks = project.tasks;
-    console.log(tasks);
+    
     // create cards 
     for (let task of tasks) {
 
@@ -114,9 +124,32 @@ function displayProjectTasks(project) {
         taskName.textContent = task.name;
 
         card.append(taskName);
-        console.log(`adding ${task.name}`);
+
         // add to tasksList
         tasksList.append(card);
+
+    }
+
+}
+
+export function populateProjectsList() {
+
+    if (localStorage.getItem('projects') != null) {
+
+        let projects = new Map(Object.entries(JSON.parse(localStorage.getItem('projects'))));
+        let option;
+
+        for (let project of projects.values()) {
+
+            // create option
+            option = document.createElement('option');
+            option.value = project.name;
+            option.textContent = project.name;
+            
+            // add to select 
+            projectsList.append(option);
+
+        }
 
     }
 

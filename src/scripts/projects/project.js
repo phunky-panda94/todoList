@@ -4,18 +4,14 @@ export default class Project {
     #name;
     #tasks;
 
-    constructor(id, name) {
-        this.#id = id;
+    constructor(name) {
+        this.#id = String(Date.now());
         this.#name = name;
         this.#tasks = [];
     }
 
     get id() {
         return this.#id;
-    }
-
-    set id(id) {
-        this.#id = id;
     }
 
     get name() {
@@ -30,16 +26,9 @@ export default class Project {
         return this.#tasks;
     }
 
-    addTask(task) {
-        this.#tasks.push(task);
-    }
-
-    removeTask(taskIndex) {
-        this.#tasks.splice(taskIndex,1);
-    }
-
     toJSON() {
         return {
+            id: this.id,
             name: this.name,
             tasks: this.tasks
         }

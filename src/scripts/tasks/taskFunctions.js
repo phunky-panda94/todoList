@@ -1,3 +1,5 @@
+import Project from '../projects/project.js';
+import { populateProjectsList } from '../projects/projectFunctions.js';
 import Task from './task.js';
 import { add, cancel, deleteBtn, form, modal, project, projectsList, name, date, notes, completed, todo, myDay } from './tasksDOM.js'
 
@@ -43,33 +45,42 @@ export function addTask() {
 
 }
 
-
-// TODO: refactor to use Project object
 function addToProject(task) {
 
+    let project;
     let projects;
     let projectTasks;
 
     // create project map if does not exist
     if (localStorage.getItem('projects') == null) {
 
+        project = new Project(task.project);
         projects = new Map();
-        projectTasks = [task.id];
+        projects.set(project.id, project);
 
     } else {
 
         // get projects 
         projects = new Map(Object.entries(JSON.parse(localStorage.getItem('projects'))));
 
-        // if new project, create project tasks array with task id
-        if (projects.get(task.project) == null) {
-            projectTasks = [task.id];
-        } else {
-            projectTasks = projects.get(task.project);
-            // add task id to project
-            projectTasks.push(task.id);
+        // check if project exists
+        for (let p of projects.values()) {
+
+            if (p.name == task.project) {
+
+                project = p;
+                project.tasks.push(task.id);
+                projects.set(project.id, project);
+
+            } else {
+
+                project = new Project(task.project);
+                projects.set(project.id, project);
+
+            }
+
         }
-        
+
     }
 
     projects.set(task.project, projectTasks);
@@ -81,18 +92,28 @@ function addToProject(task) {
 function removeFromProject(task) {
 
     let projects = new Map(Object.entries(JSON.parse(localStorage.getItem('projects'))));
+    let project;
 
-    let prevProjectTasks = projects.get(task.project);
-        
-        for (let index = 0; index < prevProjectTasks.length; index++) {
-            if (prevProjectTasks[index] == task.id) {
-                prevProjectTasks.splice(index,1);
+    // check if project exists
+    for (let p of projects.values()) {
+
+        if (p.name == task.project) {
+
+            project = p;
+                
+            for (let index = 0; index < project.tasks.length; index++) {
+                if (project.tasks[index] == task.id) {
+                    project.tasks.splice(index,1);
+                }
             }
-        }
-    
-    projects.set(task.project, prevProjectTasks);
+            
+            projects.set(project.id, project);
 
-    localStorage.setItem('projects', JSON.stringify(Object.fromEntries(projects)));
+            localStorage.setItem('projects', JSON.stringify(Object.fromEntries(projects)));
+
+        }
+
+    }
 
 }
 
@@ -232,24 +253,29 @@ export function editTask(e) {
 export function deleteTask() {
     
     let taskId = form.taskId;
+    let tasks = new Map(Object.entries(JSON.parse(localStorage.getItem('tasks'))));
+    let task = tasks.get(taskId);
 
     // change buttons
     add.textContent = 'Add'
     cancel.textContent = 'Discard'
     deleteBtn.style.display = 'none';
 
-    // close and clear form
-    modal.classList.toggle('hidden');
-    form.reset();
+    if (project.value != '') {
+        removeFromProject(task);
+    }
 
     // remove task from map and update in local storage
-    let tasks = new Map(Object.entries(JSON.parse(localStorage.getItem('tasks'))));;
     tasks.delete(taskId);
     localStorage.setItem('tasks', JSON.stringify(Object.fromEntries(tasks)));
 
     // remove card
     let taskToRemove = document.querySelector(`#task-${taskId}`);
     taskToRemove.remove();
+
+    // close and clear form
+    modal.classList.toggle('hidden');
+    form.reset();
 
 }
 
@@ -368,29 +394,6 @@ export function toggleToday(e) {
     if (myDay != null) {
         let taskCard = document.querySelector(`#task-${taskId}`);
         taskCard.remove();
-    }
-
-}
-
-export function populateProjectsList() {
-
-    if (localStorage.getItem('projects') != null) {
-
-        let projects = new Map(Object.entries(JSON.parse(localStorage.getItem('projects'))));
-        let option;
-
-        for (let project of projects.values()) {
-
-            // create option
-            option = document.createElement('option');
-            option.value = project.name;
-            option.textContent = project.name;
-            
-            // add to select 
-            projectsList.append(option);
-
-        }
-
     }
 
 }
