@@ -171,7 +171,10 @@ function displayTask(task, container) {
 
     // due date
     let date = document.createElement('span');
-    let daysLeft = calculateDaysLeft(task.date);
+    let daysLeft = task.date;
+    if (task.date != '') {
+        daysLeft = calculateDaysLeft(task.date);
+    }
 
     if (daysLeft.includes('overdue')) {
         date.style.color = 'red';
