@@ -3,7 +3,7 @@ import { populateProjectsList } from '../projects/projectFunctions.js';
 import Task from './task.js';
 import { add, cancel, deleteBtn, form, modal, project, projectsList, name, date, notes, completed, todo, myDay } from './tasksDOM.js'
 
-function createNewTask() {
+function createNewTask(today) {
 
     let task = new FormData(form);
     let newTask = new Task(
@@ -13,7 +13,7 @@ function createNewTask() {
         task.get('date'), 
         task.get('notes'), 
         false,
-        false
+        today
     );
 
     return newTask;
@@ -22,7 +22,13 @@ function createNewTask() {
 
 export function addTask() {
 
-    let newTask = createNewTask();
+    let today = false;
+
+    if (myDay != null) {
+        today = true;
+    }
+
+    let newTask = createNewTask(today);
     let tasks;
 
     if (localStorage.getItem('tasks') != null) {
@@ -41,7 +47,11 @@ export function addTask() {
     // Map -> Object -> JSON
     localStorage.setItem('tasks',JSON.stringify(Object.fromEntries(tasks)));
 
-    displayTask(newTask, todo);
+    if (today) {
+        displayTask(newTask, myDay);
+    } else {
+        displayTask(newTask, todo);
+    }
 
 }
 
@@ -145,8 +155,12 @@ export function displayTodayTasks() {
 
         for (let task of tasks.values()) {
 
-            if (task.today && ! task.complete) {
-                displayTask(task, myDay);
+            if (task.today) {
+                if (task.complete) {
+                    displayTask(task, completed);
+                } else {
+                    displayTask(task, myDay);
+                }
             } 
 
         }

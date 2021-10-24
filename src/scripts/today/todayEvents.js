@@ -13,7 +13,6 @@ let nextQuote;
 
 quote.textContent = quotes[selectedQuote];
 
-/* event listeners */
 next.addEventListener('click', () => {
     
     // display next quote
