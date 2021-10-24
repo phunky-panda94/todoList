@@ -77,13 +77,13 @@ function addToProject(task) {
         for (let p of projects.values()) {
 
             if (p.name == task.project) {
-
+                console.log('adding to project');
                 project = p;
                 project.tasks.push(task.id);
                 projects.set(project.id, project);
 
             } else {
-
+                console.log('creating new project and adding to it');
                 project = new Project(task.project);
                 projects.set(project.id, project);
 

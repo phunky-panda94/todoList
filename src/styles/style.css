@@ -447,7 +447,7 @@ nav {
     margin: 10px;
 }
 
-#sidebar > .container > .container {
+#sidebar > #sidebar-projects > .container {
     color: #ACACA7;
     width: 280px;
     margin-left: 10px;
@@ -536,6 +536,10 @@ nav {
 
 .task > input:hover {
     cursor: pointer;
+}
+
+#unassigned > .task {
+    color: #E5E8E1;
 }
 
 .hidden {
