@@ -73,6 +73,7 @@ function addToProject(task) {
         // get projects 
         projects = new Map(Object.entries(JSON.parse(localStorage.getItem('projects'))));
 
+        // TODO: fix duplicate project bug
         // check if project exists
         for (let p of projects.values()) {
 
