@@ -6,3 +6,5 @@ export const circles = [...document.querySelector('#carousel-circles').children]
 // sidebar
 export const menu = document.querySelector('#menu');
 export const sidebar = document.querySelector('#sidebar');
+export const sidebarProjects = document.querySelector('#sidebar-projects');
+export const unassigned = document.querySelector('#unassigned');
