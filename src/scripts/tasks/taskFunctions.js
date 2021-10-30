@@ -72,23 +72,24 @@ function addToProject(task) {
 
         // get projects 
         projects = new Map(Object.entries(JSON.parse(localStorage.getItem('projects'))));
+        let projectId;
 
-        // TODO: fix duplicate project bug
         // check if project exists
         for (let p of projects.values()) {
-
             if (p.name == task.project) {
-                console.log('adding to project');
-                project = p;
-                project.tasks.push(task.id);
-                projects.set(project.id, project);
+                projectId = p.id;
+            } 
+        }
 
-            } else {
-                console.log('creating new project and adding to it');
-                project = new Project(task.project);
-                projects.set(project.id, project);
-
-            }
+        if (projectId != undefined) {
+            console.log('adding to project');
+            project = projects.get(projectId);
+            project.tasks.push(task.id);
+            projects.set(project.id, project);
+        } else {
+            console.log('creating new project and adding to it');
+            project = new Project(task.project);
+            projects.set(project.id, project);
 
         }
 
