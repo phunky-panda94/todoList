@@ -222,6 +222,15 @@ nav {
     margin-top: 5px;
 }
 
+.content > span {
+    text-align: center;
+    width: 30%;
+}
+
+.checkbox {
+    width: 30%;
+}
+
 .checkbox > input {
     appearance: none; 
     border: 2px solid #ACACA7;
@@ -253,12 +262,6 @@ nav {
 }
 
 .star {
-    margin-left: 5px;
-    margin-right: 5px;
-    margin-bottom: 5px;
-}
-
-.star {
     visibility: hidden;
     cursor: pointer;
 }
@@ -286,10 +289,6 @@ nav {
     position: relative;
     top: 2px;
     visibility: visible;
-}
-
-.card-heading > span {
-    font-weight: 600;
 }
 
 #projects > .card {
