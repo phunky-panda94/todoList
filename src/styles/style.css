@@ -131,11 +131,9 @@ nav {
 .container {
     padding: 10px;
     width: 90vw;
-    z-index: 0;
 }
 
 /* carousel */
-
 .arrow {
     border: transparent;
     background-color: transparent;
@@ -214,12 +212,10 @@ nav {
     border-radius: 1em;
     background-color: #A4D454;
     color: #ffffff;
-    min-height: 200px;
-    min-width: 300px;
-    width: 325px;
+    cursor: pointer;
+    margin-bottom: 5px;
+    width: 100%;
     padding: 10px;
-    margin-right: 20px;
-    margin-bottom: 20px;
 }
 
 .card > label {
@@ -256,18 +252,18 @@ nav {
     left: 3px;
 }
 
-.card-heading {
+.star {
     margin-left: 5px;
     margin-right: 5px;
     margin-bottom: 5px;
 }
 
-.card-heading > input {
+.star {
     visibility: hidden;
     cursor: pointer;
 }
 
-.card-heading > input::before {
+.star::before {
     content: '\2606';
     color: #E5E8E1;
     font-size: 30px;
@@ -275,7 +271,7 @@ nav {
     visibility: visible;
 }
 
-.card-heading > input:checked::before {
+.star:checked::before {
     content: '\2605';
     color: #3c3c3c;
     font-size: 40px;
@@ -283,7 +279,7 @@ nav {
     visibility: visible;
 }
 
-.card-heading > input:checked::after {
+.star:checked::after {
     content: '\2605';
     color: #ffffff;
     font-size: 20px;
@@ -296,12 +292,10 @@ nav {
     font-weight: 600;
 }
 
-.click-area {
-    height: 100px;
-    cursor: pointer;
-}
-
 #projects > .card {
+    min-height: 200px;
+    min-width: 300px;
+    width: 325px;
     cursor: pointer;
 }
 

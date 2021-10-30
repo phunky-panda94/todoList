@@ -169,46 +169,19 @@ export function displayTodayTasks() {
 
 }
 
-// TODO: refactor
 function displayTask(task, container) {
 
     let taskCard = document.createElement('div');
     taskCard.classList.add('card');
+    taskCard.taskId = task.id;
+    taskCard.addEventListener('click', (e) => {
+        if (e.target.type != 'checkbox') {
+            editTask(e);
+        }
+    });
 
-    // project
-    let heading = document.createElement('div');
-    heading.classList.add('card-heading', 'flex', 'flex-ai-c', 'flex-jc-sb');
-
-    let project = document.createElement('span');
-    project.textContent = task.project;
-    heading.append(project);
-
-    // due date
-    let date = document.createElement('span');
-    let daysLeft = task.date;
-    if (task.date != '') {
-        daysLeft = calculateDaysLeft(task.date);
-    }
-
-    if (!daysLeft.includes('left')) {
-        date.style.color = 'red';
-    }
-
-    date.textContent = daysLeft;
-    heading.append(date);
-
-    // today
-    let star = document.createElement('input');
-    star.type = 'checkbox';
-    star.classList.add('flex', 'flex-ai-c', 'flex-jc-c');
-    star.taskId = task.id;
-    star.addEventListener('click', toggleToday);
-
-    if (task.today) {
-        star.checked = true;
-    }  
-
-    heading.append(star);
+    let content = document.createElement('div');
+    content.classList.add('content','flex','flex-ai-c','flex-jc-sb');
 
     // task 
     let taskItem = document.createElement('div');
@@ -229,14 +202,41 @@ function displayTask(task, container) {
     taskName.textContent = task.name;
     taskItem.append(taskName);
 
-    let clickArea = document.createElement('div');
-    clickArea.classList.add('click-area');
-    clickArea.taskId = task.id;
-    clickArea.addEventListener('click', editTask);
+    content.append(taskItem);
 
-    taskCard.append(heading);
-    taskCard.append(taskItem);
-    taskCard.append(clickArea);
+    // project
+    let project = document.createElement('span');
+    project.textContent = task.project;
+    content.append(project);
+
+    // due date
+    let date = document.createElement('span');
+    let daysLeft = task.date;
+    if (task.date != '') {
+        daysLeft = calculateDaysLeft(task.date);
+    }
+
+    if (!daysLeft.includes('left')) {
+        date.style.color = 'red';
+    }
+
+    date.textContent = daysLeft;
+    content.append(date);
+
+    // today
+    let star = document.createElement('input');
+    star.type = 'checkbox';
+    star.classList.add('star','flex', 'flex-ai-c', 'flex-jc-c');
+    star.taskId = task.id;
+    star.addEventListener('click', toggleToday);
+
+    if (task.today) {
+        star.checked = true;
+    }  
+
+    content.append(star);
+
+    taskCard.append(content);
     taskCard.setAttribute('id', `task-${task.id}`)
     container.append(taskCard);
 
@@ -244,7 +244,7 @@ function displayTask(task, container) {
 
 export function editTask(e) {
 
-    let taskId = e.target.taskId;
+    let taskId = e.currentTarget.taskId;
 
     // populate with task details
     let tasks = new Map(Object.entries(JSON.parse(localStorage.getItem('tasks'))));
