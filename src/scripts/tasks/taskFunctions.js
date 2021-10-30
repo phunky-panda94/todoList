@@ -82,12 +82,10 @@ function addToProject(task) {
         }
 
         if (projectId != undefined) {
-            console.log('adding to project');
             project = projects.get(projectId);
             project.tasks.push(task.id);
             projects.set(project.id, project);
         } else {
-            console.log('creating new project and adding to it');
             project = new Project(task.project);
             projects.set(project.id, project);
 
@@ -192,7 +190,7 @@ function displayTask(task, container) {
         daysLeft = calculateDaysLeft(task.date);
     }
 
-    if (daysLeft.includes('overdue')) {
+    if (!daysLeft.includes('left')) {
         date.style.color = 'red';
     }
 
@@ -353,7 +351,11 @@ export function calculateDaysLeft(taskDate) {
     // calculate days left / overdue
     let daysLeft = (dueDate - today) / (1000 * 60 * 60 * 24);
 
-    if (daysLeft < 0) {
+    if (daysLeft > 0 && daysLeft < 1) {
+        return 'Due today';
+    } else if (daysLeft < 0 && daysLeft > -1) {
+        return `${Math.ceil(Math.abs(daysLeft))} days overdue`;
+    } else if (daysLeft < -1) {
         return `${Math.floor(Math.abs(daysLeft))} days overdue`;
     } else {
         return `${Math.floor(daysLeft)} days left`;
