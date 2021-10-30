@@ -1,3 +1,4 @@
+import { toggleToday } from "../tasks/taskFunctions.js";
 import { sidebar, sidebarProjects, unassigned } from "./todayDOM.js";
 
 export function populateSidebarProjects() {
@@ -34,11 +35,13 @@ export function populateSidebarProjects() {
         projectTasks = document.createElement('div');
         projectTasks.classList.add('tasks','flex','flex-row','flex-wrap','flex-jc-sb');
         
+        console.log(`adding ${project.name}`);
+        console.log(project.tasks);
         // add tasks to projects
         for (let taskId of project.tasks) {
-
+            
             task = tasks.get(taskId);
-
+            console.log(`adding ${task.name}`);
             taskEntry = document.createElement('div');
             taskEntry.classList.add('task','flex','flex-row','flex-jc-sb');
 
@@ -49,6 +52,7 @@ export function populateSidebarProjects() {
             checkbox.type = 'checkbox';
             checkbox.checked = task.today;
             checkbox.classList.add('flex','flex-ai-c','flex-jc-c');
+            checkbox.addEventListener('click', () => toggleToday(taskId));
 
             taskEntry.append(taskName, checkbox);
             projectTasks.append(taskEntry);
@@ -85,6 +89,7 @@ export function populateUnassigned() {
             checkbox.type = 'checkbox';
             checkbox.checked = task.today;
             checkbox.classList.add('flex','flex-ai-c','flex-jc-c');
+            checkbox.addEventListener('click', () => toggleToday(task.id));
 
             taskEntry.append(taskName, checkbox);
             unassigned.append(taskEntry);

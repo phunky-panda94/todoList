@@ -228,7 +228,9 @@ function displayTask(task, container) {
     star.type = 'checkbox';
     star.classList.add('star','flex', 'flex-ai-c', 'flex-jc-c');
     star.taskId = task.id;
-    star.addEventListener('click', toggleToday);
+    star.addEventListener('click', () => {
+        toggleToday(task.id);
+    });
 
     if (task.today) {
         star.checked = true;
@@ -397,9 +399,8 @@ export function changeStatus(e) {
 
 }
 
-export function toggleToday(e) {
+export function toggleToday(taskId) {
 
-    let taskId = e.target.taskId
     let tasks = new Map(Object.entries(JSON.parse(localStorage.getItem('tasks'))));;
     let task = tasks.get(taskId);
     
@@ -414,7 +415,7 @@ export function toggleToday(e) {
 
     if (myDay != null) {
         let taskCard = document.querySelector(`#task-${taskId}`);
-        taskCard.remove();
+        task.today ? displayTask(task,myDay) : taskCard.remove();
     }
 
 }
