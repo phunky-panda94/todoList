@@ -14,3 +14,5 @@ export const notes = document.querySelector('#notes-text');
 export const todo = document.querySelector('#todo');
 export const completed = document.querySelector('#completed');
 export const myDay = document.querySelector('#myday');
+export const menu = document.querySelector('#menu');
+export const sidebar = document.querySelector('#sidebar');

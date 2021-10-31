@@ -1,5 +1,5 @@
 import { toggleToday } from "../tasks/taskFunctions.js";
-import { sidebar, sidebarProjects, unassigned } from "./todayDOM.js";
+import { sidebarProjects, unassigned } from "./todayDOM.js";
 
 export function populateSidebarProjects() {
 
@@ -35,13 +35,10 @@ export function populateSidebarProjects() {
         projectTasks = document.createElement('div');
         projectTasks.classList.add('tasks','flex','flex-row','flex-wrap','flex-jc-sb');
         
-        console.log(`adding ${project.name}`);
-        console.log(project.tasks);
         // add tasks to projects
         for (let taskId of project.tasks) {
             
             task = tasks.get(taskId);
-            console.log(`adding ${task.name}`);
             taskEntry = document.createElement('div');
             taskEntry.classList.add('task','flex','flex-row','flex-jc-sb');
 

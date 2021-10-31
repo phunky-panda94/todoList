@@ -2,6 +2,10 @@ import { populateProjectsList } from '../projects/projectFunctions.js';
 import { addTask, deleteTask, updateTask, resetForm } from './taskFunctions.js';
 import { openForm, closeForm, deleteBtn, form, modal, cancel } from './tasksDOM.js';
 
+export const displaySidebar = menu.addEventListener('click', () => {
+    sidebar.classList.toggle('hidden');
+});
+
 export const openFormEvent = openForm.addEventListener('click', () => {
 
     let taskId = String(Date.now());

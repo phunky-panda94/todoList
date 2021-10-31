@@ -128,17 +128,17 @@ function displayProjectTasks(project) {
         let taskName = document.createElement('p');
         taskName.textContent = task.name;
 
-        // TODO: implement edit and delete task functionality
-        let editIcon = document.createElement('span');
-        editIcon.classList.add('material-icons-outlined');
-        editIcon.textContent = 'edit';
+        // TODO: implement done and delete task functionality
+        let doneIcon = document.createElement('span');
+        doneIcon.classList.add('material-icons-outlined');
+        doneIcon.textContent = 'task_alt';
 
         let deleteIcon = document.createElement('span');
         deleteIcon.classList.add('material-icons-outlined');
         deleteIcon.textContent = 'delete_outline';
 
         let buttons = document.createElement('div');
-        buttons.append(editIcon);
+        buttons.append(doneIcon);
         buttons.append(deleteIcon);
 
         card.append(taskName);

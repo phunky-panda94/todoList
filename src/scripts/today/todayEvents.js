@@ -1,4 +1,5 @@
-import { quote, next, prev, circles, menu, sidebar } from './todayDOM.js';
+import { quote, next, prev } from './todayDOM.js';
+const circles = [...document.querySelector('#carousel-circles').children];
 
 // TODO: add quotes to local storage
 let quotes = [
@@ -67,9 +68,4 @@ circles.forEach(button => {
     });
 
 });
-    
-menu.addEventListener('click', () => {
 
-    sidebar.classList.toggle("hidden");
-
-});

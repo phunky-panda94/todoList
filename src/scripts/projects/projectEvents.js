@@ -1,11 +1,7 @@
 import { addProject, displayProject, removeProject } from "./projectFunctions.js";
 import { menu, openForm, closeForm, form, modal, actionBtn, deleteBtn, cancelBtn, tasks } from "./projectsDOM.js";
 
-export const toggleMenu = menu.addEventListener('click', () => {
-
-    sidebar.classList.toggle("hidden");
-
-});
+menu.addEventListener('click', () => sidebar.classList.toggle('hidden'));
 
 export const openFormEvent = openForm.addEventListener('click', () => {
 
