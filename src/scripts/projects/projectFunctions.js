@@ -128,14 +128,22 @@ function displayProjectTasks(project) {
         let taskName = document.createElement('p');
         taskName.textContent = task.name;
 
-        // TODO: implement done and delete task functionality
         let doneIcon = document.createElement('span');
         doneIcon.classList.add('material-icons-outlined');
-        doneIcon.textContent = 'task_alt';
+        doneIcon.taskId = taskId;
+        if (task.complete) {
+            doneIcon.textContent = 'task_alt'
+            doneIcon.style.color = '#2c2c2c';
+        } else {
+            doneIcon.textContent = 'circle';
+        } 
+        doneIcon.addEventListener('click', toggleDone);
 
         let deleteIcon = document.createElement('span');
+        deleteIcon.taskId = taskId;
         deleteIcon.classList.add('material-icons-outlined');
         deleteIcon.textContent = 'delete_outline';
+        deleteIcon.addEventListener('click', deleteTask);
 
         let buttons = document.createElement('div');
         buttons.append(doneIcon);
@@ -174,3 +182,39 @@ export function populateProjectsList() {
 
 }
 
+function toggleDone(event) {
+
+    // set task to complete
+    let tasks = new Map(Object.entries(JSON.parse(localStorage.getItem('tasks'))));
+    let task = tasks.get(event.target.taskId);
+
+    task.complete ? task.complete = false : task.complete = true;
+    tasks.set(task.id, task);
+    
+    localStorage.setItem('tasks',JSON.stringify(Object.fromEntries(tasks)));
+
+    if (event.target.textContent === 'circle') {
+        event.target.textContent = 'task_alt'
+        event.target.style.color = '#2c2c2c';
+    } else {
+        event.target.textContent = 'circle';
+        event.target.style.color = '#ffffff';
+    }
+
+}
+
+function deleteTask(event) {
+
+    if (window.confirm('Are you sure?')) {
+
+        // remove task
+        let tasks = new Map(Object.entries(JSON.parse(localStorage.getItem('tasks'))));
+
+        tasks.delete(event.target.taskId);
+        localStorage.setItem('tasks',JSON.stringify(Object.fromEntries(tasks)));
+
+        // remove card
+        event.target.parentElement.parentElement.remove();
+
+    }
+}
