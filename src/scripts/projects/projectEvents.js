@@ -7,6 +7,7 @@ export const openFormEvent = openForm.addEventListener('click', () => {
 
     modal.classList.toggle('hidden');
     deleteBtn.classList.add('none');
+    actionBtn.classList.remove('hidden');
     actionBtn.textContent = 'Add';
     cancelBtn.textContent = 'Discard';
     tasks.classList.add('none');

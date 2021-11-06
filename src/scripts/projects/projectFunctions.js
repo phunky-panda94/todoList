@@ -22,7 +22,6 @@ export function addProject(projectName) {
     // create Project object
     let project = new Project(projectName);
     let projects;
-    
 
     // if no projects, create new map
     if (localStorage.getItem('projects') == null) {
@@ -64,8 +63,6 @@ export function removeProject(projectId) {
         projectCard.remove();
     }
 
-    
-
 }
 
 export function displayProject(project) {
@@ -97,7 +94,7 @@ function displayProjectDetails(e) {
     // change buttons
     deleteBtn.projectId = project.id;
     deleteBtn.classList.remove('none');
-    actionBtn.textContent = 'Save changes';
+    actionBtn.classList.add('hidden');
     cancelBtn.textContent = 'Cancel';
 
     // display tasks
